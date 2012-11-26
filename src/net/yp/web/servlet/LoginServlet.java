@@ -87,6 +87,7 @@ public class LoginServlet extends HttpServlet {
 				else
 				{
 					int errorCount = loginUser.getErrorCount();
+					errorCount++;
 					if(errorCount >= Constant.LOGIN_USER_FREEZE_ERROR_COUNT)
 					{
 						loginUser.setErrorCount(0);
@@ -95,7 +96,6 @@ public class LoginServlet extends HttpServlet {
 					}
 					else
 					{
-						errorCount++;
 						loginUser.setErrorCount(errorCount);
 						loginService.editLoginUserErrorCount(loginUser);
 					}
