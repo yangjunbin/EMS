@@ -1,5 +1,10 @@
 package net.yp.server.util;
 
+/**
+ * 资源对象
+ * @author mac
+ *
+ */
 public class Constant {
 	/**
 	 * 登陆冻结上限次数
