@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="net.yp.server.dao.UserMsgMapper">
+
+	<!-- 获取联系人分组信息 -->
+	<select id="queryUserGroups" parameterType="Map" resultType="UserGroup">
+		<include refid="CommonMapper.pagingStart" />
+		select id,name from tb_user_group
+		<include refid="CommonMapper.pagingEnd" />
+	</select>
+
+	<!-- 获取联系人分组记录数 -->
+	<select id="queryUserGroupCount" parameterType="Map" resultType="Long">
+		select count(1) from tb_user_group where 1=1
+		<if test="name!=null">
+			and name=#{name,jdbcType=VARCHAR}
+		</if>
+	</select>
+	
+	<!-- 根据组获取联系人信息 -->
+	<select id="queryUserMsgByGroup" parameterType="Map" resultType="UserMsg">
+		<include refid="CommonMapper.pagingStart" />
+		select t1.id,t1.name,t1.phoneNumber from tb_user_msg
+		t1,tb_user_group_rel t2,tb_user_group t3
+		where t1.id=t2.msgId and
+		t2.groupId=t3.id and t2.groupId=#{groupId,jdbcType=VARCHAR}
+		<include refid="CommonMapper.pagingStart" />
+	</select>
+	
+	<!-- 根据组获取联系人信息记录数 -->
+	<select id="queryUserMsgByGroupCount" parameterType="Map" resultType="Long">
+		select count(1) from tb_user_msg
+		t1,tb_user_group_rel t2,tb_user_group t3
+		where t1.id=t2.msgId and
+		t2.groupId=t3.id and t2.groupId=#{groupId,jdbcType=VARCHAR}
+	</select>
+	
+</mapper>	
