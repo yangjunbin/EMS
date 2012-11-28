@@ -1,5 +1,7 @@
 package net.yp.server.util;
 
+import java.util.UUID;
+
 /**
  * 资源对象
  * @author mac
@@ -20,4 +22,13 @@ public class Constant {
 	 * 登陆用户正常状态
 	 */
 	public final static int LOGIN_USER_NORMAL_STATUS = 1;
+	
+	/**
+	 * 获得UUID
+	 * @return
+	 */
+	public static String getUUID()
+	{
+		return UUID.randomUUID().toString();
+	}
 }

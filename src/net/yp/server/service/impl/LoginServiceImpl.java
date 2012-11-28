@@ -22,6 +22,7 @@ public class LoginServiceImpl implements LoginService {
 			loginUsers =  loginMapper.queryLoginUsers(params);
 		} catch (Exception e) {
 			logger.debug(e.getMessage());
+			e.printStackTrace();
 		}
 		return loginUsers;
 	}
@@ -43,6 +44,7 @@ public class LoginServiceImpl implements LoginService {
 			count = loginMapper.queryLoginUserCount(params);
 		} catch (Exception e) {
 			logger.debug(e.getMessage());
+			e.printStackTrace();
 		}
 		return count;
 	}
@@ -53,6 +55,7 @@ public class LoginServiceImpl implements LoginService {
 			result = loginMapper.addLoginUser(loginUser);
 		} catch (Exception e) {
 			logger.debug(e.getMessage());
+			e.printStackTrace();
 		}
 		return result;
 	}
@@ -63,6 +66,7 @@ public class LoginServiceImpl implements LoginService {
 			result = loginMapper.editLoginUser(loginUser);
 		} catch (Exception e) {
 			logger.debug(e.getMessage());
+			e.printStackTrace();
 		}
 		return result;
 	}
@@ -74,6 +78,7 @@ public class LoginServiceImpl implements LoginService {
 			loginMapper.editLoginUserLoginTime(loginUser.getId());
 		} catch (Exception e) {
 			logger.debug(e.getMessage());
+			e.printStackTrace();
 		}
 		return result;
 	}
@@ -84,6 +89,7 @@ public class LoginServiceImpl implements LoginService {
 			result = loginMapper.editLoginUserLoginTime(id);
 		} catch (Exception e) {
 			logger.debug(e.getMessage());
+			e.printStackTrace();
 		}
 		return result;
 	}
@@ -95,6 +101,7 @@ public class LoginServiceImpl implements LoginService {
 			result = loginMapper.editLoginUserErrorCount(loginUser);
 		} catch (Exception e) {
 			logger.debug(e.getMessage());
+			e.printStackTrace();
 		}
 		return result;
 	}

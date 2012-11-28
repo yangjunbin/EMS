@@ -5,9 +5,7 @@
 
 	<!-- 获取所有的登陆用户信息 -->
 	<select id="queryLoginUsers" parameterType="Map" resultType="LoginUser">
-		<include refid="CommonMapper.pagingStart" />
-			select user,id,pwd,name,sex,regTime,status,loginTime,errorCount from tb_login_user 
-		<include refid="CommonMapper.pagingEnd" />
+			select user,id,pwd,name,sex,str_to_date(regTime,'%Y-%m-%d %H:%i:%s') regTime,status,str_to_date(loginTime,'%Y-%m-%d %H:%i:%s') loginTime,errorCount from tb_login_user 
 	</select>
 	
 	<!-- 根据条件获得一个登陆用户信息 -->
@@ -33,14 +31,13 @@
 	
 	<!-- 新增登陆用户 -->
 	<insert id="addLoginUser" parameterType="LoginUser">
-		insert into tb_login_user(id,user,pwd,name,sex,regtime,status)
+		insert into tb_login_user(id,user,pwd,name,sex,regtime)
 		values( #{id,jdbcType=VARCHAR},
 			    #{user,jdbcType=VARCHAR},
 				#{pwd,jdbcType=VARCHAR},
 				#{name,jdbcType=VARCHAR},
 				#{sex,jdbcType=NUMERIC},
-				now(),
-				#{status,jdbcType=NUMERIC} )
+				now())
 	</insert>
 	
 	<!-- 修改登陆用户信息 -->

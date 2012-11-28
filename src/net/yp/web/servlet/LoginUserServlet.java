@@ -2,8 +2,8 @@ package net.yp.web.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -16,18 +16,19 @@ import net.yp.server.service.LoginService;
 import net.yp.server.util.Constant;
 import net.yp.server.util.Context;
 
-/**
- * @author Eric
- *
- */
-public class LoginServlet extends HttpServlet {
+public class LoginUserServlet extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private LoginService loginService = (LoginService)Context.getApplicationContext().getBean("loginService");
 
 	/**
 	 * Constructor of the object.
 	 */
-	public LoginServlet() {
+	public LoginUserServlet() {
 		super();
 	}
 
@@ -51,75 +52,63 @@ public class LoginServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
-		String user = request.getParameter("user");
+		String type = request.getParameter("type");
 		String pwd = request.getParameter("pwd");
-		Map<String,Object> params = new HashMap<String,Object>();
-		params.put("user", user);
-		params.put("pwd", pwd);
-		LoginUser loginUser = loginService.queryLoginUser(params);
-		if(loginUser==null)
+		String user = request.getParameter("user");
+		String name = request.getParameter("name");
+		String sex = request.getParameter("sex");
+		if("query".equals(type))
 		{
-	        PrintWriter out = response.getWriter();
-	        out.print("errorCount=-1");  
-	        out.flush();  
-	        out.close();  
+			List<LoginUser> loginUsers = loginService.queryLoginUsers(null);
+			request.setAttribute("loginUsers", loginUsers);
+			request.getRequestDispatcher("/loginUser.jsp").forward(request, response);
 		}
-		else
+		else if("add".equals(type))
 		{
-			Date loginTime = loginUser.getLoginTime();
-			loginService.editLoginUserLoginTime(loginUser.getId());
-			if(loginUser.getStatus()==Constant.LOGIN_USER_FREEZE_STATUS&&new Date().getTime()-loginTime.getTime() < 1000*60*10)
+			Map<String,Object> params = new HashMap<String,Object>();
+			params.put("user", user);		
+			long count =  loginService.queryLoginUserCount(params);
+			if(count>0)
 			{
 		        PrintWriter out = response.getWriter();
-		        out.print("errorCount=-2");  
+		        out.print("status=failed");  
+		        out.print("reason=用户已存在");  
 		        out.flush();  
 		        out.close();  
 			}
 			else
 			{
-				int errorCount = loginUser.getErrorCount();
-				if(loginUser.getStatus()==Constant.LOGIN_USER_FREEZE_STATUS&&new Date().getTime()-loginTime.getTime() > 1000*60*10)
-				{
-					loginUser.setStatus(Constant.LOGIN_USER_NORMAL_STATUS);
-					loginService.editLoginUserStatus(loginUser);
-				}
-				if(errorCount!=0&&new Date().getTime()-loginTime.getTime() > 1000*60*10)
-				{
-					loginUser.setErrorCount(0);
-					loginService.editLoginUserErrorCount(loginUser);
-				}
-				if(pwd.equals(loginUser.getPwd()))
-				{
-					request.getRequestDispatcher("/index.jsp").forward(request, response);
-				}
-				else
-				{
-					errorCount++;
-					if(errorCount >= Constant.LOGIN_USER_FREEZE_ERROR_COUNT)
-					{
-						loginUser.setErrorCount(0);
-						loginUser.setStatus(Constant.LOGIN_USER_FREEZE_STATUS);
-						loginService.editLoginUserErrorCount(loginUser);
-						loginService.editLoginUserStatus(loginUser);
-					}
-					else
-					{
-						loginUser.setErrorCount(errorCount);
-						loginService.editLoginUserErrorCount(loginUser);
-					}
-			        PrintWriter out = response.getWriter();
-			        out.print("errorCount="+errorCount);  
-			        out.flush();  
-			        out.close();  
-				}
+				String id = Constant.getUUID();
+				LoginUser loginUser = new LoginUser();
+				loginUser.setId(id);
+				loginUser.setName(name);
+				loginUser.setPwd(pwd);
+				loginUser.setSex(sex);
+				loginUser.setUser(user);
+				loginService.addLoginUser(loginUser);
+		        PrintWriter out = response.getWriter();
+		        out.print("status=success");  
+		        out.flush();  
+		        out.close();  
 			}
 		}
-		
+		else if("edit".equals(type))
+		{
+			
+		}
+		else if("del".equals(type))
+		{
+			
+		}
+		else
+		{
+			
+		}
 	}
-	
+
 	/**
 	 * The doPost method of the servlet. <br>
 	 *

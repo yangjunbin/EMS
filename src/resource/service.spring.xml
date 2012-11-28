@@ -6,10 +6,9 @@
            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.0.xsd
            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
-	<bean id="loginService"
-		class="net.yp.server.service.impl.LoginServiceImpl" />
+	<bean id="loginService" class="net.yp.server.service.impl.LoginServiceImpl" />
 	<bean id="context" class="net.yp.server.util.Context" />
-		
+	<bean id="userService" class="net.yp.server.service.impl.UserServiceImpl" />
 </beans>
 
 

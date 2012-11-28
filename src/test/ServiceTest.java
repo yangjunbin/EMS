@@ -3,6 +3,7 @@ package test;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import net.yp.server.model.LoginUser;
 import net.yp.server.service.LoginService;
@@ -66,7 +67,6 @@ public class ServiceTest
     
     public static void main (String[] args)
     {
-		logger.debug("111");
-		logger.info("222");
+		System.out.println(UUID.randomUUID().toString());
     }
 }

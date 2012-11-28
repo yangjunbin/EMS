@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,7 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'index.jsp' starting page</title>
+    <title>My JSP 'userMsg.jsp' starting page</title>
+    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -18,10 +21,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+
   </head>
   
   <body>
-    <a href="UserGroupServlet">联系人</a><br>
-    <a href="LoginUserServlet?type=query">用户</a>
+   	<table style="text-align: left; width: 100%;" border="1">
+		<tr>
+			<td>姓名</td>
+			<td>号码</td>
+		</tr>
+		<c:forEach var="userMsg" items="${userMsgs}">
+			<tr>
+				<td>${userMsg.name}</td>
+				<td>${userMsg.phoneNumber}</td>
+			</tr>
+		</c:forEach>
+	</table>
   </body>
 </html>

@@ -1,17 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<base href="<%=basePath%>">
-
-<title>My JSP 'login.jsp' starting page</title>
+<title>My JSP 'UserGroup.jsp' starting page</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -25,11 +20,15 @@
 </head>
 
 <body>
-	<form action="LoginServlet" method="post">
-		用户：<input type="text" id="user" name="user"/> <br>
-		密码：<input type="text" id="pwd" name="pwd"/> <br>
-		<input type="submit" value="submit" />
-	</form>
-
+	<table style="text-align: left; width: 100%;" border="1">
+		<tr>
+			<td>分组</td>
+		</tr>
+		<c:forEach var="userGroup" items="${userGroups}">
+			<tr>
+				<td><a href="UserMsgServlet?groupId=${userGroup.id}">${userGroup.name}</a></td>
+			</tr>
+		</c:forEach>
+	</table>
 </body>
 </html>

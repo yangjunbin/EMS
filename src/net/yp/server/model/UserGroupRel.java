@@ -1,5 +1,10 @@
 package net.yp.server.model;
 
+/**
+ * 联系人与分组关系
+ * @author Eric
+ *
+ */
 public class UserGroupRel {
 	private String msgId;
 	private String groupId;
