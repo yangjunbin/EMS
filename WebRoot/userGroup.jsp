@@ -20,6 +20,8 @@
 </head>
 
 <body>
+  <a href="fileUpload.jsp">上传</a>
+  <a href="DownloadTemplate?filename=userMsgs.xlsx">模板下载</a>
 	<table style="text-align: left; width: 100%;" border="1">
 		<tr>
 			<td>分组</td>

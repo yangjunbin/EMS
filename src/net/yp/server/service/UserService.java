@@ -22,4 +22,11 @@ public interface UserService {
       */
      List<UserMsg> queryUserMsgByGroup(Map<String,Object> params);
      
+     /**
+      * 新增联系人
+      * @param userMsgs
+      * @return
+      */
+     String addUserMsgs(List<UserMsg> userMsgs);
+     
 }

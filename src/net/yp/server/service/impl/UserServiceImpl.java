@@ -35,4 +35,37 @@ public class UserServiceImpl implements UserService {
 		return userMsgs;
 	}
 
+	public String addUserMsgs(List<UserMsg> userMsgs) {
+		int success = 0;
+		int failed = 0;
+		int repeat = 0;
+		try {
+			int count = userMsgs.size();
+			for(int i=0;i<count;i++)
+			{
+				UserMsg userMsg = userMsgs.get(i);
+				Long userMsgRepeat = userMsgMapper.queryUserMsgCountByNameAndPhoneNumber(userMsg);
+				if(userMsgRepeat==0)
+				{
+					int result = userMsgMapper.addUserMsg(userMsg);
+					if(result==0)
+					{
+						failed++;
+					}
+					else
+					{
+						success++;
+					}
+				}
+				else
+				{
+					repeat++;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "成功:"+success+",失败:"+failed+",重复:"+repeat+"（已过滤）";
+	}
+
 }

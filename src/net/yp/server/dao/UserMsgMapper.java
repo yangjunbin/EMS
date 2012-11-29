@@ -39,6 +39,18 @@ public interface UserMsgMapper
       */
      Long queryUserMsgByGroupCount(Map<String,Object> params);
      
+     /**
+      * 根据联系人姓名和电话号码判断是否已存在
+      * @param userMsg
+      * @return
+      */
+     Long queryUserMsgCountByNameAndPhoneNumber(UserMsg userMsg);
+     /**
+      * 新增联系人信息
+      * @param userMsgs
+      * @return
+      */
+     Integer addUserMsg(UserMsg userMsg);
     /**
      * 公司版权信息.
      */

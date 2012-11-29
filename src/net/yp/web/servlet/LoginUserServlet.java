@@ -60,6 +60,15 @@ public class LoginUserServlet extends HttpServlet {
 		String user = request.getParameter("user");
 		String name = request.getParameter("name");
 		String sex = request.getParameter("sex");
+		String id = request.getParameter("id");
+
+		LoginUser loginUser = new LoginUser();
+		loginUser.setId(id);
+		loginUser.setName(name);
+		loginUser.setPwd(pwd);
+		loginUser.setSex(sex);
+		loginUser.setUser(user);
+		
 		if("query".equals(type))
 		{
 			List<LoginUser> loginUsers = loginService.queryLoginUsers(null);
@@ -81,13 +90,7 @@ public class LoginUserServlet extends HttpServlet {
 			}
 			else
 			{
-				String id = Constant.getUUID();
-				LoginUser loginUser = new LoginUser();
-				loginUser.setId(id);
-				loginUser.setName(name);
-				loginUser.setPwd(pwd);
-				loginUser.setSex(sex);
-				loginUser.setUser(user);
+				loginUser.setId(Constant.getUUID());
 				loginService.addLoginUser(loginUser);
 		        PrintWriter out = response.getWriter();
 		        out.print("status=success");  
@@ -97,15 +100,26 @@ public class LoginUserServlet extends HttpServlet {
 		}
 		else if("edit".equals(type))
 		{
-			
+			loginService.editLoginUser(loginUser);
+	        PrintWriter out = response.getWriter();
+	        out.print("status=success");  
+	        out.flush();  
+	        out.close();  
 		}
 		else if("del".equals(type))
 		{
-			
+			loginService.delLoginUser(id);
+	        PrintWriter out = response.getWriter();
+	        out.print("status=success");  
+	        out.flush();  
+	        out.close();  
 		}
 		else
 		{
-			
+	        PrintWriter out = response.getWriter();
+	        out.print("status=error");  
+	        out.flush();  
+	        out.close();  
 		}
 	}
 

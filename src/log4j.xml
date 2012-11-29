@@ -20,7 +20,7 @@
         </layout>  
     </appender>  
  
- 	<category name="net.carefx" additivity="false">
+ 	<category name="net.yp" additivity="false">
 		<priority value="DEBUG"/>
 		<appender-ref ref="console"/>
 	</category>

@@ -32,4 +32,16 @@
 		t2.groupId=t3.id and t2.groupId=#{groupId,jdbcType=VARCHAR}
 	</select>
 	
+	<!-- 根据联系人姓名和电话号码判断是否已存在 -->
+	<select id="queryUserMsgCountByNameAndPhoneNumber" parameterType="UserMsg" resultType="Long">
+		select count(1) from tb_user_msg where 
+		name=#{name,jdbcType=VARCHAR} and phoneNumber=#{phoneNumber,jdbcType=VARCHAR}
+	</select>	
+	
+	<!-- 新增联系人信息 -->
+	<insert id="addUserMsg" parameterType="UserMsg">
+		insert into tb_user_msg(id,name,phoneNumber)
+		values(#{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{phoneNumber,jdbcType=VARCHAR})
+	</insert>
+	
 </mapper>	

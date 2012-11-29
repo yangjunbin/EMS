@@ -47,9 +47,9 @@
 				<td>${loginUser.regTime}</td>
 				<td>${loginUser.loginTime}</td>
 				<td>${loginUser.errorCount}</td>
-				<td><a href="">新增</a></td>
-				<td><a href="">修改</a></td>
-				<td><a href="">删除</a></td>
+				<td><a href="addLoginUser.jsp">新增</a></td>
+				<td><a href="editLoginUser.jsp?user=${loginUser.user}&name=${loginUser.name}&sex=${loginUser.sex}&pwd=${loginUser.pwd}&id=${loginUser.id}">修改</a></td>
+				<td><a href="LoginUserServlet?type=del&id=${loginUser.id}">删除</a></td>
 			</tr>
 		</c:forEach>
 	</table>
