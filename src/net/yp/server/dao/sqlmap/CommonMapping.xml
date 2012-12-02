@@ -21,4 +21,9 @@
             ${dir}
         </if>
     </sql>
+    
+    <!-- mysql分页 -->
+    <sql id="mysqlPaging">
+    	LIMIT #{page},#{pageSize}
+    </sql>
 </mapper>	

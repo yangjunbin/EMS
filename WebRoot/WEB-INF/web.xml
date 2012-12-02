@@ -54,6 +54,41 @@
     <servlet-name>DownloadTemplate</servlet-name>
     <servlet-class>net.yp.web.servlet.DownloadTemplate</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UserGroupRelServlet</servlet-name>
+    <servlet-class>net.yp.web.servlet.UserGroupRelServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>QuestionBankServlet</servlet-name>
+    <servlet-class>net.yp.web.servlet.QuestionBankServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>EmsTemplateServlet</servlet-name>
+    <servlet-class>net.yp.web.servlet.EmsTemplateServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>EmsMsgServlet</servlet-name>
+    <servlet-class>net.yp.web.servlet.EmsMsgServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>EmsSendServlet</servlet-name>
+    <servlet-class>net.yp.web.servlet.EmsSendServlet</servlet-class>
+  </servlet>
+
+
+
+
+
 
 
 <context-param>
@@ -89,6 +124,26 @@
   <servlet-mapping>
     <servlet-name>DownloadTemplate</servlet-name>
     <url-pattern>/DownloadTemplate</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UserGroupRelServlet</servlet-name>
+    <url-pattern>/UserGroupRelServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>QuestionBankServlet</servlet-name>
+    <url-pattern>/QuestionBankServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EmsTemplateServlet</servlet-name>
+    <url-pattern>/EmsTemplateServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EmsMsgServlet</servlet-name>
+    <url-pattern>/EmsMsgServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>EmsSendServlet</servlet-name>
+    <url-pattern>/EmsSendServlet</url-pattern>
   </servlet-mapping>	
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

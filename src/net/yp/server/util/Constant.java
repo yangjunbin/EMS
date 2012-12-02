@@ -24,6 +24,41 @@ public class Constant {
 	public final static int LOGIN_USER_NORMAL_STATUS = 1;
 	
 	/**
+	 * 未分组ID
+	 */
+	public final static String UNGROUPED_ID = "1c5e118e-e7c2-4421-83fd-b762d7359202";
+
+	/**
+	 * 返回成功状态
+	 */
+	public final static String RESULT_SUCCESS = "SUCCESS";
+	
+	/**
+	 * 返回失败状态
+	 */
+	public final static String RESULT_FAILED = "FAILED";
+	
+	/**
+	 * 问题类型
+	 */
+	public final static String QUESTION_STATUS = "1";
+	
+	/**
+	 * 照片类型
+	 */
+	public final static String PICTURE_STATUS = "2";
+	
+	/**
+	 * 商品类型
+	 */
+	public final static String COMMODITY_STATUS = "3";
+	
+	/**
+	 * 一般类型
+	 */
+	public final static String GENERAL_STATUS = "4";
+
+	/**
 	 * 获得UUID
 	 * @return
 	 */

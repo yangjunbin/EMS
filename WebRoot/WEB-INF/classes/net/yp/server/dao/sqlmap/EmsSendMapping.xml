@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="net.yp.server.dao.EmsSendMapper">
+
+	<!-- 新增发送信息 -->
+	<insert id="addEmsSend" parameterType="EmsSend">
+		insert into tb_ems_send(id,phoneNumber,recordTime,sendText)
+		value(#{id,jdbcType=VARCHAR},#{phoneNumber,jdbcType=VARCHAR},
+		#{recordTime,jdbcType=VARCHAR},#{sendText,jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 查询发送信息 -->
+	<select id="queryEmsSend" parameterType="Map" resultType="EmsSend">
+		select id,phoneNumber,recordTime,sendText,sendTime,type,status,execTime
+		from tb_ems_send
+		<include refid="CommonMapper.mysqlPaging"/>
+	</select>
+	
+	<!-- 查询发送信息记录数 -->
+	<select id="queryEmsSendCount" parameterType="Map" resultType="Long">
+		select count(1) from tb_ems_send
+	</select>
+</mapper>	

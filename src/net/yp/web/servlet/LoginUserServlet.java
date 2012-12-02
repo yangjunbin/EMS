@@ -15,6 +15,7 @@ import net.yp.server.model.LoginUser;
 import net.yp.server.service.LoginService;
 import net.yp.server.util.Constant;
 import net.yp.server.util.Context;
+import net.yp.server.util.EmsUtil;
 
 public class LoginUserServlet extends HttpServlet {
 
@@ -61,7 +62,7 @@ public class LoginUserServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String sex = request.getParameter("sex");
 		String id = request.getParameter("id");
-
+		String result = EmsUtil.getJsonResult(Constant.RESULT_SUCCESS, "");
 		LoginUser loginUser = new LoginUser();
 		loginUser.setId(id);
 		loginUser.setName(name);
@@ -83,8 +84,7 @@ public class LoginUserServlet extends HttpServlet {
 			if(count>0)
 			{
 		        PrintWriter out = response.getWriter();
-		        out.print("status=failed");  
-		        out.print("reason=用户已存在");  
+		        out.print(EmsUtil.getJsonResult(Constant.RESULT_FAILED, "用户已存在"));  
 		        out.flush();  
 		        out.close();  
 			}
@@ -93,7 +93,7 @@ public class LoginUserServlet extends HttpServlet {
 				loginUser.setId(Constant.getUUID());
 				loginService.addLoginUser(loginUser);
 		        PrintWriter out = response.getWriter();
-		        out.print("status=success");  
+		        out.print(result);  
 		        out.flush();  
 		        out.close();  
 			}
@@ -102,7 +102,7 @@ public class LoginUserServlet extends HttpServlet {
 		{
 			loginService.editLoginUser(loginUser);
 	        PrintWriter out = response.getWriter();
-	        out.print("status=success");  
+	        out.print(result);  
 	        out.flush();  
 	        out.close();  
 		}
@@ -110,14 +110,14 @@ public class LoginUserServlet extends HttpServlet {
 		{
 			loginService.delLoginUser(id);
 	        PrintWriter out = response.getWriter();
-	        out.print("status=success");  
+	        out.print(result);  
 	        out.flush();  
 	        out.close();  
 		}
 		else
 		{
 	        PrintWriter out = response.getWriter();
-	        out.print("status=error");  
+	        out.print(EmsUtil.getJsonResult(Constant.RESULT_FAILED, "param error"));  
 	        out.flush();  
 	        out.close();  
 		}

@@ -1,10 +1,13 @@
 package net.yp.web.servlet;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +17,7 @@ import net.yp.server.model.UserMsg;
 import net.yp.server.service.UserService;
 import net.yp.server.util.Constant;
 import net.yp.server.util.Context;
+import net.yp.server.util.EmsUtil;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -42,6 +46,7 @@ public class FileUpLoadServlet extends HttpServlet {
 	private UserService userService = (UserService)Context.getApplicationContext().getBean("userService");
 	private Logger logger = Logger.getLogger(FileUpLoadServlet.class.getClass());
     private String result = "";
+    private String status = "";
     
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -50,8 +55,7 @@ public class FileUpLoadServlet extends HttpServlet {
         response.setContentType ("text/html;charset=UTF-8");
         response.setCharacterEncoding ("UTF-8");
         result = "SUCCESS";
-        
-
+        status = Constant.RESULT_SUCCESS;
         DiskFileItemFactory factory = new DiskFileItemFactory ();
         ServletFileUpload upload = new ServletFileUpload (factory);
         upload.setHeaderEncoding ("UTF-8");
@@ -62,11 +66,21 @@ public class FileUpLoadServlet extends HttpServlet {
             for (int i = 0; i < fileItems.size (); i++)
             {
                 FileItem item = (FileItem) fileItems.get (i);
-                if (!item.isFormField ())
+                if (item.isFormField ())
                 {
-                    save(item.getInputStream());
+                    String name = item.getFieldName();
+                    String value = item.getString();
                 }
-
+                else
+                {
+                	 if(item.getSize()>1024*1024)
+                     {
+                     	result="文件不能超过1024KB";
+                     	status=Constant.RESULT_FAILED;
+                     	break;
+                     }
+                	save(item.getInputStream());
+                }
             }
         }
         catch (FileUploadException e)
@@ -79,7 +93,7 @@ public class FileUpLoadServlet extends HttpServlet {
             result = e.getLocalizedMessage ();
             e.printStackTrace ();
         }
-        response.getWriter ().print (result);
+        response.getWriter ().print (EmsUtil.getJsonResult(status, result));
         response.getWriter ().flush ();
         response.getWriter ().close ();
 	}
@@ -90,12 +104,16 @@ public class FileUpLoadServlet extends HttpServlet {
         try
         {
             List <UserMsg> userMsgs = parseMateDataType (workbook.getSheetAt (0));
-            result = userService.addUserMsgs(userMsgs);
+            if(userMsgs!=null)
+            {
+            	result = userService.addUserMsgs(userMsgs);
+            }
         }
         catch (Exception e)
         {
             result = e.getLocalizedMessage ();
-            logger.info ("联系人文件上传yi'c", e);
+        	status=Constant.RESULT_FAILED;
+            logger.info ("联系人文件上传", e);
         }
     }
     
@@ -125,6 +143,8 @@ public class FileUpLoadServlet extends HttpServlet {
             int rowNum = sheetAt.getRow (k).getLastCellNum ();
             if(rowNum < 2){
                 result = "Excel文件格式不正确,小于2个列,请下载模板";
+            	status=Constant.RESULT_FAILED;
+            	return null;
             }else{
                 cell = sheetAt.getRow (k).getCell (0);
                 if (cell != null)

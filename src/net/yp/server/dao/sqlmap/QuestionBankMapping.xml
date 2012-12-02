@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="net.yp.server.dao.QuestionBankMapper">
+
+	<!-- 新增问题 -->
+	<insert id="addQuestion" parameterType="Question">
+		insert into tb_question(id,name,createTime,type)
+		values(#{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},now(),
+		#{type,jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 修改问题 -->
+	<update id="editQuestion" parameterType="Question">
+		update tb_question set name=#{name,jdbcType=VARCHAR},type=#{type,jdbcType=VARCHAR}
+		where id=#{id,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 删除问题 -->
+	<delete id="delQuestion" parameterType="String">
+		delete from tb_question where id=#{id,jdbcType=VARCHAR}
+	</delete>
+	
+	<!-- 新增答案 -->
+	<insert id="addAnswer" parameterType="Answer">
+		insert into tb_answer(id,qid,context)
+		values(#{id,jdbcType=VARCHAR},#{qid,jdbcType=VARCHAR},#{context,jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 修改答案 -->
+	<update id="editAnswer" parameterType="Answer">
+		update tb_answer set context=#{context,jdbcType=VARCHAR} where id=#{id,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 删除答案 -->
+	<delete id="delAnswer" parameterType="Map">
+		delete from tb_answer where 1=1
+		<if test="id!=null">
+			and id=#{id,jdbcType=VARCHAR}
+		</if>
+		<if test="qid!=null">
+			and qid=#{qid,jdbcType=VARCHAR}
+		</if>
+	</delete>
+	
+	<!-- 查询问题 -->
+	<select id="queryQuestion" resultType="Question" parameterType="Map"> 
+		select id,name,createTime,type from tb_question
+	</select>
+	
+	<!-- 查询答案 -->
+	<select id="queryAnswer" resultType="Answer" parameterType="String">
+		select id,qid,context from tb_answer
+		where qid=#{qid,jdbcType=VARCHAR}
+	</select>
+</mapper>	

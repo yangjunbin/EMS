@@ -8,6 +8,7 @@ import net.yp.server.model.UserGroup;
 import net.yp.server.model.UserGroupRel;
 import net.yp.server.model.UserMsg;
 import net.yp.server.service.UserService;
+import net.yp.server.util.Constant;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,6 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserMsgMapper userMsgMapper;
 	private Logger logger = Logger.getLogger(UserServiceImpl.class.getClass());
-	
-	
 	public List<UserGroup> queryUserGroup(Map<String, Object> params) {
 		List<UserGroup> userGroups = null;
 		try {
@@ -61,6 +60,11 @@ public class UserServiceImpl implements UserService {
 					}
 					else
 					{
+						//默认分组
+						UserGroupRel userGroupRel = new UserGroupRel();
+						userGroupRel.setGroupId(Constant.UNGROUPED_ID);
+						userGroupRel.setMsgId(userMsg.getId());
+						userMsgMapper.addUserGroupRel(userGroupRel);
 						success++;
 					}
 				}

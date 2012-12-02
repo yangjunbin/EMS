@@ -21,7 +21,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <a href="UserGroupServlet">联系人</a><br>
-    <a href="LoginUserServlet?type=query">用户</a>
+    <a href="UserGroupServlet?type=query">联系人</a><br>
+    <a href="LoginUserServlet?type=query">用户</a><br>
+    <a href="EmsSendServlet?type=query">发送信息</a>
   </body>
 </html>

@@ -9,6 +9,10 @@
 	<bean id="loginService" class="net.yp.server.service.impl.LoginServiceImpl" />
 	<bean id="context" class="net.yp.server.util.Context" />
 	<bean id="userService" class="net.yp.server.service.impl.UserServiceImpl" />
+	<bean id="questionBankService" class="net.yp.server.service.impl.QuestionBankServiceImpl" />
+	<bean id="emsTemplateService" class="net.yp.server.service.impl.EmsTemplateServiceImpl" />
+	<bean id="emsSendService" class="net.yp.server.service.impl.EmsSendServiceImpl" />
+	<bean id="emsMsgService" class="net.yp.server.service.impl.EmsMsgServiceImpl" />
 </beans>
 
 

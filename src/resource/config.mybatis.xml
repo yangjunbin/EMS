@@ -7,7 +7,18 @@
 		<typeAlias alias="LoginUser" type="net.yp.server.model.LoginUser" />
 		<typeAlias alias="UserGroup" type="net.yp.server.model.UserGroup" />
 		<typeAlias alias="UserGroupRel" type="net.yp.server.model.UserGroupRel" />
+		<typeAlias alias="Commodity" type="net.yp.server.model.Commodity" />
+		<typeAlias alias="Answer" type="net.yp.server.model.Answer" />
+		<typeAlias alias="EmsTemplate" type="net.yp.server.model.EmsTemplate" />
+		<typeAlias alias="EmsTemplateDetal" type="net.yp.server.model.EmsTemplateDetal" />
+		<typeAlias alias="GeneralTemplate" type="net.yp.server.model.GeneralTemplate" />
+		<typeAlias alias="PublicityTemplate" type="net.yp.server.model.PublicityTemplate" />
+		<typeAlias alias="QaTemplate" type="net.yp.server.model.QaTemplate" />
+		<typeAlias alias="Question" type="net.yp.server.model.Question" />
+		<typeAlias alias="QuestionAndAnswer" type="net.yp.server.model.QuestionAndAnswer" />
 		<typeAlias alias="UserMsg" type="net.yp.server.model.UserMsg" />
+		<typeAlias alias="EmsMsg" type="net.yp.server.model.EmsMsg" />
+		<typeAlias alias="EmsSend" type="net.yp.server.model.EmsSend" />
 	</typeAliases>
 
 </configuration>	

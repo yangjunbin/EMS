@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD iBatis Mapper 3.0 //EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="net.yp.server.dao.EmsMsgMapper">
+
+	<!-- 新增网信信息 -->
+	<insert id="addEmsMsg" parameterType="EmsMsg">
+		insert into tb_ems_msg(id,msg,tid,uid,createTime,status)
+		values(#{id,jdbcType=VARCHAR},#{msg,jdbcType=VARCHAR},#{tid,jdbcType=VARCHAR}
+		#{uid,jdbcType=VARCHAR},now(),#{status,jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 修改网信信息 -->
+	<update id="editEmsMsg" parameterType="EmsMsg">
+		update tb_ems_msg set msg=#{msg,jdbcType=VARCHAR},tid=#{tid,jdbcType=VARCHAR},
+		uid=#{uid,jdbcType=VARCHAR} where id=#{id,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 修改网信信息状态 -->
+	<update id="editEmsMsgStatus" parameterType="EmsMsg">
+		update tb_ems_msg set status=#{status,jdbcType=VARCHAR} where id=#{id,jdbcType=VARCHAR}
+	</update>
+	
+	<!-- 删除网信信息 -->
+	<delete id="delEmsMsg" parameterType="String">
+		delete from tb_ems_msg where id=#{id,jdbcType=VARCHAR}
+	</delete>
+	
+	<!-- 查询网信信息 -->
+	<select id="queryEmsMsg" parameterType="Map" resultType="EmsMsg">
+		select id,msg,tid,uid,createTime,status from tb_ems_msg
+		<include refid="CommonMapper.mysqlPaging"/>
+	</select>
+	
+	<!-- 查询网信信息记录数 -->
+	<select id="queryEmsMsgCount" parameterType="Map" resultType="Long">
+		select count(1) from tb_ems_msg
+	</select>
+</mapper>	
