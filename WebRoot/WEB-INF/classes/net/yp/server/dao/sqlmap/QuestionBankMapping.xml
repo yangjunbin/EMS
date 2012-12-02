@@ -46,8 +46,12 @@
 	<!-- 查询问题 -->
 	<select id="queryQuestion" resultType="Question" parameterType="Map"> 
 		select id,name,createTime,type from tb_question
+		<include refid="CommonMapper.mysqlPaging"/>
 	</select>
-	
+	<!-- 查询问题记录数 -->
+	<select id="queryquestionCount" resultType="Long">
+		select count(1) from tb_question
+	</select>
 	<!-- 查询答案 -->
 	<select id="queryAnswer" resultType="Answer" parameterType="String">
 		select id,qid,context from tb_answer

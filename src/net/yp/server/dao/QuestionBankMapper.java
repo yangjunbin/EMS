@@ -58,6 +58,12 @@ public interface QuestionBankMapper {
 	List<Question> queryQuestion(Map<String,Object> params);
 	
 	/**
+	 * 查询问题记录数
+	 * @return
+	 */
+	Long queryquestionCount();
+	
+	/**
 	 * 查询答案
 	 * @param qid
 	 * @return

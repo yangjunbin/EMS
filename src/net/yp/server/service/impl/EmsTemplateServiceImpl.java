@@ -204,7 +204,7 @@ public class EmsTemplateServiceImpl implements EmsTemplateService {
 			logger.info(e.getMessage());
 			e.printStackTrace();
 		}
-		return EmsUtil.getJsonResult(Constant.RESULT_SUCCESS, "SUCCESS");
+		return "SUCCESS";
 	}
 
 }

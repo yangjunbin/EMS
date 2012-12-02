@@ -6,7 +6,7 @@
 	<!-- 新增网信信息 -->
 	<insert id="addEmsMsg" parameterType="EmsMsg">
 		insert into tb_ems_msg(id,msg,tid,uid,createTime,status)
-		values(#{id,jdbcType=VARCHAR},#{msg,jdbcType=VARCHAR},#{tid,jdbcType=VARCHAR}
+		values(#{id,jdbcType=VARCHAR},#{msg,jdbcType=VARCHAR},#{tid,jdbcType=VARCHAR},
 		#{uid,jdbcType=VARCHAR},now(),#{status,jdbcType=VARCHAR})
 	</insert>
 	
@@ -28,7 +28,8 @@
 	
 	<!-- 查询网信信息 -->
 	<select id="queryEmsMsg" parameterType="Map" resultType="EmsMsg">
-		select id,msg,tid,uid,createTime,status from tb_ems_msg
+		select t1.id,t1.msg,t1.tid,t2.name tname,t1.uid,t3.user uname,t1.createTime,t1.status from tb_ems_msg t1,tb_ems_template t2,tb_login_user t3
+		where t1.tid=t2.id and t1.uid=t3.id
 		<include refid="CommonMapper.mysqlPaging"/>
 	</select>
 	

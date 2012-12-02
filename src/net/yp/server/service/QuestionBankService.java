@@ -36,6 +36,13 @@ public interface QuestionBankService {
 	 * @return
 	 */
 	List<QuestionAndAnswer> queryQuestionAndAnswer(Map<String,Object> params);
+	
+	/**
+	 * 查询问题总数目
+	 * @return
+	 */
+	long queryQuestionCount();
+	
 	/**
 	 * 修改问题
 	 * @param question
@@ -48,7 +55,7 @@ public interface QuestionBankService {
 	 * @param ids
 	 * @return
 	 */
-	Integer delQuestion(List<String> ids);
+	String delQuestion(String[] ids);
 	
 	/**
 	 * 新增答案

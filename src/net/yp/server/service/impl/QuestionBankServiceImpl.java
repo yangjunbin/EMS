@@ -1,5 +1,6 @@
 package net.yp.server.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,15 +45,21 @@ public class QuestionBankServiceImpl implements QuestionBankService {
 		return result;
 	}
 
-	public Integer delQuestion(List<String> ids) {
-		int result = 0;
+	public String delQuestion(String[] ids) {
+		String status = Constant.RESULT_SUCCESS;
+		String result = "SUCCESS";
 		try {
-			result = questionBankMapper.delQuestion(ids.get(0));
+			int count = ids.length;
+			for (int i = 0; i < count; i++) {
+				questionBankMapper.delQuestion(ids[i]);
+			}
 		} catch (Exception e) {
-			logger.info(e.getMessage());
+			status = Constant.RESULT_FAILED;
+			result = e.getMessage();
+			logger.info(result);
 			e.printStackTrace();
 		}
-		return result;
+		return EmsUtil.getJsonResult(status, result);
 	}
 
 	public Integer addAnswer(Answer answer) {
@@ -135,7 +142,7 @@ public class QuestionBankServiceImpl implements QuestionBankService {
 
 	public List<QuestionAndAnswer> queryQuestionAndAnswer(
 			Map<String, Object> params) {
-		List<QuestionAndAnswer> questionAndAnswers = null;
+		List<QuestionAndAnswer> questionAndAnswers = new ArrayList<QuestionAndAnswer>();
 		try {
 			List<Question> questions = questionBankMapper.queryQuestion(params);
 			for (Question question : questions) {
@@ -172,6 +179,10 @@ public class QuestionBankServiceImpl implements QuestionBankService {
 			e.printStackTrace();
 		}
 		return EmsUtil.getJsonResult(status, result);
+	}
+
+	public long queryQuestionCount() {
+		return questionBankMapper.queryquestionCount();
 	}
 
 }

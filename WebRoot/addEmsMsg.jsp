@@ -9,7 +9,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'index.jsp' starting page</title>
+    <title>My JSP 'addLoginUser.jsp' starting page</title>
+    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -18,13 +19,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+
   </head>
   
   <body>
-    <a href="UserGroupServlet?type=query">联系人</a><br>
-    <a href="LoginUserServlet?type=query">用户</a><br>
-    <a href="EmsSendServlet?type=query">发送信息</a><br>
-    <a href="EmsMsgServlet?type=query">网信信息</a><br>
-    <a href="QuestionBankServlet?type=query">题库</a>
+  	<form action="EmsMsgServlet">
+  		msg:<input type="text" id="msg" name="msg"/><br>
+  		uid:<input type="text" id="uid" name="uid"/>(应该默认是当前登陆人)<br>
+  		tid:<input type="text" id="tid" name="tid"/>(应该是选择模板列表)<br>
+  		<input type="hidden" value="add" id="type" name="type"/>
+  		<input type="submit" value="submit"/>
+  	</form>
   </body>
 </html>

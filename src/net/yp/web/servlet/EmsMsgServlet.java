@@ -2,13 +2,28 @@ package net.yp.web.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.yp.server.model.EmsMsg;
+import net.yp.server.service.EmsMsgService;
+import net.yp.server.util.Constant;
+import net.yp.server.util.Context;
+import net.yp.server.util.EmsUtil;
+
 public class EmsMsgServlet extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private EmsMsgService emsMsgService = (EmsMsgService)Context.getApplicationContext().getBean("emsMsgService");
 
 	/**
 	 * Constructor of the object.
@@ -38,17 +53,59 @@ public class EmsMsgServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
+		response.setContentType("text/html;charset=utf-8");
+		request.setCharacterEncoding("utf-8");
+		
+		String result = "";
+		String type = request.getParameter("type");
+		String id = request.getParameter("id");
+		String tid = request.getParameter("tid");
+		String uid = request.getParameter("uid");
+		String msg = request.getParameter("msg");
+		if("query".equals(type))
+		{
+			String page = request.getParameter("page");
+			String pageSize = request.getParameter("pageSize");
+			Map<String,Object> params = new HashMap<String,Object>();
+			params.put("page", page==null?0:Integer.parseInt(page)*Integer.parseInt(pageSize));
+			params.put("pageSize", pageSize==null?5:Integer.parseInt(pageSize));
+			List<EmsMsg> emsMsgs = emsMsgService.queryEmsMsg(params);
+			request.setAttribute("emsMsgs", emsMsgs);
+			request.getRequestDispatcher("/emsMsg.jsp").forward(request, response);
+		}
+		else if("add".equals(type))
+		{
+			EmsMsg emsMsg = new EmsMsg();
+			emsMsg.setId(Constant.getUUID());
+			emsMsg.setTid(tid);
+			emsMsg.setUid(uid);
+			emsMsg.setMsg(msg);
+			emsMsg.setStatus("1");
+			result = emsMsgService.addEmsMsg(emsMsg);
+		}
+		else if("edit".equals(type))
+		{
+			EmsMsg emsMsg = new EmsMsg();
+			emsMsg.setId(id);
+			emsMsg.setTid(tid);
+			emsMsg.setUid(uid);
+			emsMsg.setMsg(msg);
+			result = emsMsgService.editEmsMsg(emsMsg);
+		}
+		else if("del".equals(type))
+		{
+			result = emsMsgService.delEmsMsg(id);
+		}
+		else if("editStatus".equals(type))
+		{
+			String status = request.getParameter("status");
+			EmsMsg emsMsg = new EmsMsg();
+			emsMsg.setId(id);
+			emsMsg.setStatus(status);
+			result = emsMsgService.editEmsMsgStatus(emsMsg);
+		}
 		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the GET method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
+		out.print(result);
 		out.flush();
 		out.close();
 	}
@@ -66,19 +123,7 @@ public class EmsMsgServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.setContentType("text/html");
-		PrintWriter out = response.getWriter();
-		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-		out.println("<HTML>");
-		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-		out.println("  <BODY>");
-		out.print("    This is ");
-		out.print(this.getClass());
-		out.println(", using the POST method");
-		out.println("  </BODY>");
-		out.println("</HTML>");
-		out.flush();
-		out.close();
+		this.doGet(request, response);
 	}
 
 	/**
