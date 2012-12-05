@@ -52,10 +52,10 @@ public interface QuestionBankService {
 	
 	/**
 	 * 删除问题
-	 * @param ids
+	 * @param uuids
 	 * @return
 	 */
-	String delQuestion(String[] ids);
+	String delQuestion(String[] uuids);
 	
 	/**
 	 * 新增答案
@@ -73,16 +73,16 @@ public interface QuestionBankService {
 	
 	/**
 	 * 删除答案
-	 * @param ids
+	 * @param uuids
 	 * @return
 	 */
-	String delAnswer(String[] ids);
+	String delAnswer(String[] uuids);
 	
 	/**
 	 * 根据题目删除答案
-	 * @param pid
+	 * @param puuid
 	 * @return
 	 */
-	String delAnswer(String pid);
+	String delAnswer(String puuid);
 	
 }

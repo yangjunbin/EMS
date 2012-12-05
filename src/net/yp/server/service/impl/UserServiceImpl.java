@@ -62,8 +62,8 @@ public class UserServiceImpl implements UserService {
 					{
 						//默认分组
 						UserGroupRel userGroupRel = new UserGroupRel();
-						userGroupRel.setGroupId(Constant.UNGROUPED_ID);
-						userGroupRel.setMsgId(userMsg.getId());
+						userGroupRel.setGroupuuId(Constant.UNGROUPED_ID);
+						userGroupRel.setMsguuId(userMsg.getUuid());
 						userMsgMapper.addUserGroupRel(userGroupRel);
 						success++;
 					}
@@ -106,15 +106,15 @@ public class UserServiceImpl implements UserService {
 		return msg;
 	}
 
-	public String delUserMsg(List<String> ids) {
+	public String delUserMsg(List<String> uuids) {
 		int success = 0;
 		int failed = 0;
 		try {
-			int count = ids.size();
+			int count = uuids.size();
 			for(int i=0;i<count;i++)
 			{
-				String id = ids.get(i);
-				int result = userMsgMapper.delUserMsg(id);
+				String uuid = uuids.get(i);
+				int result = userMsgMapper.delUserMsg(uuid);
 				if(result>0)
 				{
 					success++;
@@ -172,15 +172,15 @@ public class UserServiceImpl implements UserService {
 		return msg;
 	}
 
-	public String delUserGroup(List<String> ids) {
+	public String delUserGroup(List<String> uuids) {
 		int success = 0;
 		int failed = 0;
 		try {
-			int count = ids.size();
+			int count = uuids.size();
 			for(int i=0;i<count;i++)
 			{
-				String id = ids.get(i);
-				int result = userMsgMapper.delUserGroup(id);
+				String uuid = uuids.get(i);
+				int result = userMsgMapper.delUserGroup(uuid);
 				if(result>0)
 				{
 					success++;
@@ -245,6 +245,28 @@ public class UserServiceImpl implements UserService {
 			logger.info(e.getMessage());
 		}
 		return "成功："+success+",失败:"+failed;
+	}
+
+	public Long queryUserGroupCount(Map<String, Object> params) {
+		long size = 0l;
+		try {
+			size = userMsgMapper.queryUserGroupCount(params);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info(e.getMessage());
+		}
+		return size;
+	}
+
+	public Long queryUserMsgByGroupCount(Map<String, Object> params) {
+		long size = 0l;
+		try {
+			size = userMsgMapper.queryUserMsgByGroupCount(params);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.info(e.getMessage());
+		}
+		return size;
 	}
 
 }

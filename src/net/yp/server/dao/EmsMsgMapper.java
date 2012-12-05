@@ -30,10 +30,10 @@ public interface EmsMsgMapper {
 	
 	/**
 	 * 删除网信信息
-	 * @param id
+	 * @param uuid
 	 * @return
 	 */
-	Integer delEmsMsg(String id);
+	Integer delEmsMsg(String uuid);
  
 	/**
 	 * 查询网信信息

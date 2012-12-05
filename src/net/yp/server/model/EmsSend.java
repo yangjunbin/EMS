@@ -3,7 +3,8 @@ package net.yp.server.model;
 import java.util.Date;
 
 public class EmsSend {
-	private String id;
+	private String uuid;
+	private int id;
 	private String phoneNumber;
 	private String status;
 	private Date recordTime;
@@ -11,10 +12,17 @@ public class EmsSend {
 	private Date sendTime;
 	private String sendText;
 	private String type;
-	public String getId() {
+	
+	public String getUuid() {
+		return uuid;
+	}
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getPhoneNumber() {

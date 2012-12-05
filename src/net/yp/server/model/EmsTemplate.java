@@ -4,17 +4,25 @@ import java.util.Date;
 import java.util.List;
 
 public class EmsTemplate {
-	private String id;
+	private String uuid;
+	private int id;
 	private String name;
 	private String type;
 	private Date createTime;
 	private String status;
 	private String context;
 	private List<EmsTemplateDetal> emsTemplateDetals;
-	public String getId() {
+	
+	public String getUuid() {
+		return uuid;
+	}
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getName() {

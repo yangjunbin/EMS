@@ -17,11 +17,25 @@ public interface UserService {
      List<UserGroup> queryUserGroup(Map<String,Object> params);
      
      /**
+      * 获取联系人分组记录数
+      * @param params
+      * @return
+      */
+     Long queryUserGroupCount(Map<String,Object> params);
+     
+     /**
       * 根据组获取联系人信息
       * @param params
       * @return
       */
      List<UserMsg> queryUserMsgByGroup(Map<String,Object> params);
+     
+     /**
+      * 根据组获取联系人信息记录数
+      * @param params
+      * @return
+      */
+     Long queryUserMsgByGroupCount(Map<String,Object> params);
      
      /**
       * 查询未分组联系人信息
@@ -46,10 +60,10 @@ public interface UserService {
      
      /**
       * 删除联系人信息
-      * @param ids
+      * @param uuids
       * @return
       */
-     String delUserMsg(List<String> ids);
+     String delUserMsg(List<String> uuids);
      
      /**
       * 新增联系人分组
@@ -67,10 +81,10 @@ public interface UserService {
      
      /**
       * 删除联系人分组
-      * @param ids
+      * @param uuids
       * @return
       */
-     String delUserGroup(List<String> ids);
+     String delUserGroup(List<String> uuids);
      
      /**
       * 新增联系人与分组关联

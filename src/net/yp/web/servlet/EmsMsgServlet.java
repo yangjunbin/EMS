@@ -58,9 +58,9 @@ public class EmsMsgServlet extends HttpServlet {
 		
 		String result = "";
 		String type = request.getParameter("type");
-		String id = request.getParameter("id");
-		String tid = request.getParameter("tid");
-		String uid = request.getParameter("uid");
+		String uuid = request.getParameter("uuid");
+		String tuuid = request.getParameter("tuuid");
+		String uuuid = request.getParameter("uuuid");
 		String msg = request.getParameter("msg");
 		if("query".equals(type))
 		{
@@ -70,15 +70,17 @@ public class EmsMsgServlet extends HttpServlet {
 			params.put("page", page==null?0:Integer.parseInt(page)*Integer.parseInt(pageSize));
 			params.put("pageSize", pageSize==null?5:Integer.parseInt(pageSize));
 			List<EmsMsg> emsMsgs = emsMsgService.queryEmsMsg(params);
+			long size = emsMsgService.queryEmsMsgCount(params);
+			request.setAttribute("size", size);
 			request.setAttribute("emsMsgs", emsMsgs);
 			request.getRequestDispatcher("/emsMsg.jsp").forward(request, response);
 		}
 		else if("add".equals(type))
 		{
 			EmsMsg emsMsg = new EmsMsg();
-			emsMsg.setId(Constant.getUUID());
-			emsMsg.setTid(tid);
-			emsMsg.setUid(uid);
+			emsMsg.setUuid(Constant.getUUID());
+			emsMsg.setTuuid(tuuid);
+			emsMsg.setUuuid(uuuid);
 			emsMsg.setMsg(msg);
 			emsMsg.setStatus("1");
 			result = emsMsgService.addEmsMsg(emsMsg);
@@ -86,21 +88,21 @@ public class EmsMsgServlet extends HttpServlet {
 		else if("edit".equals(type))
 		{
 			EmsMsg emsMsg = new EmsMsg();
-			emsMsg.setId(id);
-			emsMsg.setTid(tid);
-			emsMsg.setUid(uid);
+			emsMsg.setUuid(uuid);
+			emsMsg.setTuuid(tuuid);
+			emsMsg.setUuuid(uuuid);
 			emsMsg.setMsg(msg);
 			result = emsMsgService.editEmsMsg(emsMsg);
 		}
 		else if("del".equals(type))
 		{
-			result = emsMsgService.delEmsMsg(id);
+			result = emsMsgService.delEmsMsg(uuid);
 		}
 		else if("editStatus".equals(type))
 		{
 			String status = request.getParameter("status");
 			EmsMsg emsMsg = new EmsMsg();
-			emsMsg.setId(id);
+			emsMsg.setUuid(uuid);
 			emsMsg.setStatus(status);
 			result = emsMsgService.editEmsMsgStatus(emsMsg);
 		}

@@ -28,7 +28,7 @@
 		</tr>
 		<c:forEach var="userGroup" items="${userGroups}">
 			<tr>
-				<td><a href="UserMsgServlet?groupId=${userGroup.id}">${userGroup.name}</a></td>
+				<td><a href="UserMsgServlet?groupuuId=${userGroup.uuid}">${userGroup.name}</a></td>
 			</tr>
 		</c:forEach>
 	</table>

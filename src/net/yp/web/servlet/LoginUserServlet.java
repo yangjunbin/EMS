@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.yp.server.model.EmsMsg;
 import net.yp.server.model.LoginUser;
 import net.yp.server.service.LoginService;
 import net.yp.server.util.Constant;
@@ -61,10 +62,10 @@ public class LoginUserServlet extends HttpServlet {
 		String user = request.getParameter("user");
 		String name = request.getParameter("name");
 		String sex = request.getParameter("sex");
-		String id = request.getParameter("id");
+		String uuid = request.getParameter("uuid");
 		String result = EmsUtil.getJsonResult(Constant.RESULT_SUCCESS, "");
 		LoginUser loginUser = new LoginUser();
-		loginUser.setId(id);
+		loginUser.setUuid(uuid);
 		loginUser.setName(name);
 		loginUser.setPwd(pwd);
 		loginUser.setSex(sex);
@@ -72,7 +73,14 @@ public class LoginUserServlet extends HttpServlet {
 		
 		if("query".equals(type))
 		{
-			List<LoginUser> loginUsers = loginService.queryLoginUsers(null);
+			String page = request.getParameter("page");
+			String pageSize = request.getParameter("pageSize");
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("page", page==null?0:Integer.parseInt(page)*Integer.parseInt(pageSize));
+			params.put("pageSize", pageSize==null?5:Integer.parseInt(pageSize));
+			List<LoginUser> loginUsers = loginService.queryLoginUsers(params);
+			long size = loginService.queryLoginUserCount(params);
+			request.setAttribute("size", size);
 			request.setAttribute("loginUsers", loginUsers);
 			request.getRequestDispatcher("/loginUser.jsp").forward(request, response);
 		}
@@ -90,7 +98,7 @@ public class LoginUserServlet extends HttpServlet {
 			}
 			else
 			{
-				loginUser.setId(Constant.getUUID());
+				loginUser.setUuid(Constant.getUUID());
 				loginService.addLoginUser(loginUser);
 		        PrintWriter out = response.getWriter();
 		        out.print(result);  
@@ -108,7 +116,7 @@ public class LoginUserServlet extends HttpServlet {
 		}
 		else if("del".equals(type))
 		{
-			loginService.delLoginUser(id);
+			loginService.delLoginUser(uuid);
 	        PrintWriter out = response.getWriter();
 	        out.print(result);  
 	        out.flush();  

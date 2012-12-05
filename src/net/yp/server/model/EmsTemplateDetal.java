@@ -1,24 +1,32 @@
 package net.yp.server.model;
 
 public class EmsTemplateDetal {
-	private String id;
-	private String pid;
+	private String uuid;
+	private int id;
+	private String puuid;
 	private String name;
 	private String value;
 	private String type;
 	private String text;
 	private int orderNo;
-	public String getId() {
+	
+	public String getUuid() {
+		return uuid;
+	}
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-	public String getPid() {
-		return pid;
+	public String getPuuid() {
+		return puuid;
 	}
-	public void setPid(String pid) {
-		this.pid = pid;
+	public void setPuuid(String puuid) {
+		this.puuid = puuid;
 	}
 	public String getName() {
 		return name;

@@ -5,14 +5,14 @@
 
 	<!-- 新增发送信息 -->
 	<insert id="addEmsSend" parameterType="EmsSend">
-		insert into tb_ems_send(id,phoneNumber,recordTime,sendText)
-		value(#{id,jdbcType=VARCHAR},#{phoneNumber,jdbcType=VARCHAR},
+		insert into tb_ems_send(uuid,phoneNumber,recordTime,sendText)
+		value(#{uuid,jdbcType=VARCHAR},#{phoneNumber,jdbcType=VARCHAR},
 		#{recordTime,jdbcType=VARCHAR},#{sendText,jdbcType=VARCHAR})
 	</insert>
 	
 	<!-- 查询发送信息 -->
 	<select id="queryEmsSend" parameterType="Map" resultType="EmsSend">
-		select id,phoneNumber,recordTime,sendText,sendTime,type,status,execTime
+		select id,uuid,phoneNumber,recordTime,sendText,sendTime,type,status,execTime
 		from tb_ems_send
 		<include refid="CommonMapper.mysqlPaging"/>
 	</select>

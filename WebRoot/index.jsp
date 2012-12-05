@@ -2,6 +2,11 @@
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+if(!"success".equals(request.getSession().getAttribute("status")))
+{
+	request.setAttribute("errorMsg", "请先登陆");
+	request.getRequestDispatcher("/error.jsp").forward(request, response);
+}
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

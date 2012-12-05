@@ -27,21 +27,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		总记录数:${size}<br>
         	<table style="text-align: left; width: 100%;" border="1">
 		<tr>
-			<td>id</td>
+			<td>uuid</td>
 			<td>name</td>
 			<td>createTime</td>
 			<td>type</td>
-			<td>答案(id)</td>
+			<td>答案(uuid)</td>
 		</tr>
 		<c:forEach var="questionAndAnswer" items="${questionAndAnswers}">
 			<tr>
-				<td>${questionAndAnswer.question.id}</td>
+				<td>${questionAndAnswer.question.uuid}</td>
 				<td>${questionAndAnswer.question.name}</td>
 				<td>${questionAndAnswer.question.createTime}</td>
 				<td>${questionAndAnswer.question.type}(单选还是多选)</td>
 				<td>
 				<c:forEach var="answer" items="${questionAndAnswer.answers}">
-					${answer.context}(${answer.id }),
+					${answer.context}(${answer.uuid }),
 				</c:forEach>
 				</td>
 			</tr>

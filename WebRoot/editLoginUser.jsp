@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		name:<input type="text" id="name" name="name" value="${param.name}"/><br>
   		sex:<input type="text" id="sex" name="sex" value="${param.sex}"/><br>
   		<input type="hidden" value="edit" id="type" name="type"/>
-  		<input type="hidden" value="${param.id}" id="id" name="id"/>
+  		<input type="hidden" value="${param.uuid}" id="uuid" name="uuid"/>
   		<input type="submit" value="submit"/>
   	</form>
   </body>
