@@ -32,13 +32,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <!--内容-->
   <div class="container nms">
     <div class="content">
-      <form class="form-horizontal" action="LoginUserServlet" method="post">
+      <form class="form-horizontal" action="UserMsgServlet" method="post">
         <fieldset>
           <legend>更新管理员</legend>
           <div class="control-group">
             <label class="control-label" for="username">用户名</label>
             <div class="controls">
-              <input type="text" id="username" name="user" placeholder="输入用户名" value="${param.user}">
+              <input type="text" id="username" name="username" placeholder="输入用户名" value="${param.user}">
             </div>
           </div>
           <div class="control-group">
