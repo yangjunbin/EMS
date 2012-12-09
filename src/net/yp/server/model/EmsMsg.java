@@ -5,9 +5,10 @@ import java.util.Date;
 public class EmsMsg {
 	private String uuid;
 	private int id;
-	private String tuuid;//模板
+	private int tid;//模板
+	private String name;
 	private String tname;
-	private String uuuid;//创建人
+	private int uid;//创建人
 	private String uname;
 	private String msg;
 	private String status;
@@ -16,6 +17,12 @@ public class EmsMsg {
 	private GeneralTemplate generalTemplate;
 	private PublicityTemplate publicityTemplate;
 	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public String getUuid() {
 		return uuid;
 	}
@@ -28,17 +35,17 @@ public class EmsMsg {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getTuuid() {
-		return tuuid;
+	public int getTid() {
+		return tid;
 	}
-	public void setTuuid(String tuuid) {
-		this.tuuid = tuuid;
+	public void setTid(int tid) {
+		this.tid = tid;
 	}
-	public String getUuuid() {
-		return uuuid;
+	public int getUid() {
+		return uid;
 	}
-	public void setUuuid(String uuuid) {
-		this.uuuid = uuuid;
+	public void setUid(int uid) {
+		this.uid = uid;
 	}
 	public QaTemplate getQaTempLate() {
 		return qaTempLate;

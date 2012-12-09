@@ -14,7 +14,14 @@ public class GeneralTemplate {
 	 * 模板内容
 	 */
 	private String text;
+	private int emsMsgId;
 
+	public int getEmsMsgId() {
+		return emsMsgId;
+	}
+	public void setEmsMsgId(int emsMsgId) {
+		this.emsMsgId = emsMsgId;
+	}
 	public String getPictureUrl() {
 		return pictureUrl;
 	}

@@ -58,10 +58,12 @@ public class EmsMsgServlet extends HttpServlet {
 		
 		String result = "";
 		String type = request.getParameter("type");
-		String uuid = request.getParameter("uuid");
-		String tuuid = request.getParameter("tuuid");
-		String uuuid = request.getParameter("uuuid");
+		String id = request.getParameter("id");
+		String tid = request.getParameter("tid");
+		String uid = request.getSession().getAttribute("uid").toString();
 		String msg = request.getParameter("msg");
+		String name = request.getParameter("name");
+		String tempType = request.getParameter("tempType");
 		if("query".equals(type))
 		{
 			String page = request.getParameter("page");
@@ -79,30 +81,46 @@ public class EmsMsgServlet extends HttpServlet {
 		{
 			EmsMsg emsMsg = new EmsMsg();
 			emsMsg.setUuid(Constant.getUUID());
-			emsMsg.setTuuid(tuuid);
-			emsMsg.setUuuid(uuuid);
+			emsMsg.setUid(Integer.parseInt(uid));
 			emsMsg.setMsg(msg);
+			emsMsg.setName(name);
 			emsMsg.setStatus("1");
 			result = emsMsgService.addEmsMsg(emsMsg);
+			long emsMsgId = emsMsgService.queryEmsMsglastSeqId();
+			request.setAttribute("emsMsgId", emsMsgId);
+			String url = "";
+			if(Constant.QUESTION_STATUS.equals(tempType))//问答
+			{
+				url = "nms/qa.jsp";
+			}
+			else if(Constant.COMMODITY_STATUS.equals(tempType))//宣传
+			{
+				url = "nms/publicity.jsp";
+			}
+			else if(Constant.GENERAL_STATUS.equals(tempType))//一般
+			{
+				url = "nms/normal.jsp";
+			}
+			request.getRequestDispatcher(url).forward(request, response);
 		}
 		else if("edit".equals(type))
 		{
 			EmsMsg emsMsg = new EmsMsg();
-			emsMsg.setUuid(uuid);
-			emsMsg.setTuuid(tuuid);
-			emsMsg.setUuuid(uuuid);
+			emsMsg.setId(Integer.parseInt(id));
+			emsMsg.setTid(Integer.parseInt(tid));
+			emsMsg.setUid(Integer.parseInt(uid));
 			emsMsg.setMsg(msg);
 			result = emsMsgService.editEmsMsg(emsMsg);
 		}
 		else if("del".equals(type))
 		{
-			result = emsMsgService.delEmsMsg(uuid);
+			result = emsMsgService.delEmsMsg(id);
 		}
 		else if("editStatus".equals(type))
 		{
 			String status = request.getParameter("status");
 			EmsMsg emsMsg = new EmsMsg();
-			emsMsg.setUuid(uuid);
+			emsMsg.setId(Integer.parseInt(id));
 			emsMsg.setStatus(status);
 			result = emsMsgService.editEmsMsgStatus(emsMsg);
 		}

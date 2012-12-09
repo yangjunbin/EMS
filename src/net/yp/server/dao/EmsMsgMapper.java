@@ -48,4 +48,10 @@ public interface EmsMsgMapper {
 	 * @return
 	 */
 	Long queryEmsMsgCount(Map<String,Object> params);
+	
+	/**
+	 * 查询序列
+	 * @return
+	 */
+	Integer queryEmsMsglastSeqId();
 }

@@ -10,7 +10,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-  <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="../stylesheets/bootstrap.min.css">
   <link rel="stylesheet" href="stylesheets/common.css" />
   <style>
   #content { width:640px; height:10em; }
@@ -42,19 +42,19 @@
   <!--内容-->
   <div class="container nms">
     <div class="content">
-      <form class="form-horizontal" action="EmsMsgServlet?type=add" method="post">
+      <form class="form-horizontal" action="/EMS/EmsMsgServlet?type=add" method="get">
         <fieldset id="step-one">
           <legend>1. 创建短信</legend>
           <div class="control-group">
             <label class="control-label" for="name">名称</label>
             <div class="controls">
-              <input type="text" id="name" placeholder="输入网信名称">
+              <input type="text" id="name" name="name" placeholder="输入网信名称">
             </div>
           </div>
           <div class="control-group">
             <label class="control-label" for="inputPassword">短信内容</label>
             <div class="controls">
-              <textarea id="content"></textarea>
+              <textarea id="content" name="msg"></textarea>
             </div>
           </div>
         </fieldset>
@@ -100,11 +100,11 @@
     </div>
   </div>
 
-  <script src="javascripts/jquery.min.js"></script>
+  <script src="../javascripts/jquery.min.js"></script>
   <script>
-    $('.choose_template').click(function() {
+    ('.choose_template .btn').click(function() {
       var me = $(this);
-      $("#tempType").val(me.data("value"));
+      $("#tempType").val(me.data("type"));
       return false;
     });
   </script>

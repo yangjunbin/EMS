@@ -15,6 +15,7 @@ public class PublicityTemplate {
 	private String pictureSource;
 	private String pictureName;
 	private String pictureType;
+	
 	/**
 	 * 介绍
 	 */
@@ -24,7 +25,14 @@ public class PublicityTemplate {
 	 * 商品列表
 	 */
 	private List<Commodity> commoditys;
+	private int emsMsgId;
 
+	public int getEmsMsgId() {
+		return emsMsgId;
+	}
+	public void setEmsMsgId(int emsMsgId) {
+		this.emsMsgId = emsMsgId;
+	}
 	
 	public String getPictureSource() {
 		return pictureSource;

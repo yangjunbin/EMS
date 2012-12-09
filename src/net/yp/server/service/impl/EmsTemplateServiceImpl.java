@@ -3,8 +3,10 @@ package net.yp.server.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import net.yp.server.dao.EmsMsgMapper;
 import net.yp.server.dao.EmsTemplateMapper;
 import net.yp.server.model.Commodity;
+import net.yp.server.model.EmsMsg;
 import net.yp.server.model.EmsTemplate;
 import net.yp.server.model.EmsTemplateDetal;
 import net.yp.server.model.GeneralTemplate;
@@ -22,6 +24,8 @@ public class EmsTemplateServiceImpl implements EmsTemplateService {
 
 	@Autowired
 	private EmsTemplateMapper emsTemplateMapper;
+	@Autowired
+	private EmsMsgMapper emsMsgMapper;
 	private static  Logger logger=Logger.getLogger(EmsTemplateServiceImpl.class);
 
 	public Integer addEmsTemplate(EmsTemplate emsTemplate) {
@@ -113,7 +117,7 @@ public class EmsTemplateServiceImpl implements EmsTemplateService {
 			emsTemplate.setUuid(puuid);
 			emsTemplate.setType(Constant.QUESTION_STATUS);
 			emsTemplateMapper.addEmsTemplate(emsTemplate);//保存模板
-			
+			int emsTempId = emsTemplateMapper.queryEmsTemplastSeqId();
 			EmsTemplateDetal _emsTemplateDetal = new EmsTemplateDetal();
 			_emsTemplateDetal.setUuid(Constant.getUUID());
 			_emsTemplateDetal.setType(Constant.PICTURE_STATUS);
@@ -133,6 +137,7 @@ public class EmsTemplateServiceImpl implements EmsTemplateService {
 				emsTemplateDetal.setValue(questionAndAnswer.getQuestion().getUuid());
 				emsTemplateMapper.addEmsTemplateDetal(emsTemplateDetal);//保存扩展属性（问题）
 			}
+			editEmsMsgTempId(emsTempId,qaTemplate.getEmsMsgId());
 		} catch (Exception e) {
 			logger.info(e.getMessage());
 			e.printStackTrace();
@@ -140,6 +145,13 @@ public class EmsTemplateServiceImpl implements EmsTemplateService {
 		return EmsUtil.getJsonResult(Constant.RESULT_SUCCESS, "SUCCESS");
 	}
 
+	private void editEmsMsgTempId(int tempId,int emsMsgId)
+	{
+		EmsMsg emsMsg = new EmsMsg();
+		emsMsg.setId(emsMsgId);
+		emsMsg.setTid(tempId);
+		emsMsgMapper.editEmsMsg(emsMsg);
+	}
 	public String addPublicityTemplate(PublicityTemplate publicityTemplate) {
 		try {
 			EmsTemplate emsTemplate = new EmsTemplate();
@@ -156,7 +168,7 @@ public class EmsTemplateServiceImpl implements EmsTemplateService {
 			_emsTemplateDetal.setName("picture");
 			_emsTemplateDetal.setValue(publicityTemplate.getPictureUrl());
 			emsTemplateMapper.addEmsTemplateDetal(_emsTemplateDetal);//保存扩展属性（图片）
-			
+			int emsTempId = emsTemplateMapper.queryEmsTemplastSeqId();
 			List<Commodity> commoditys = publicityTemplate.getCommoditys();
 			for(Commodity commodity : commoditys)
 			{				
@@ -168,6 +180,7 @@ public class EmsTemplateServiceImpl implements EmsTemplateService {
 				emsTemplateDetal.setValue(commodity.getUuid());
 				emsTemplateMapper.addEmsTemplateDetal(emsTemplateDetal);//保存扩展属性（商品）
 			}
+			editEmsMsgTempId(emsTempId,publicityTemplate.getEmsMsgId());
 		} catch (Exception e) {
 			logger.info(e.getMessage());
 			e.printStackTrace();
@@ -183,6 +196,7 @@ public class EmsTemplateServiceImpl implements EmsTemplateService {
 			emsTemplate.setUuid(puuid);
 			emsTemplate.setType(Constant.GENERAL_STATUS);
 			emsTemplateMapper.addEmsTemplate(emsTemplate);//保存模板
+			int emsTempId = emsTemplateMapper.queryEmsTemplastSeqId();
 
 			EmsTemplateDetal _emsTemplateDetal = new EmsTemplateDetal();
 			_emsTemplateDetal.setUuid(Constant.getUUID());
@@ -200,6 +214,8 @@ public class EmsTemplateServiceImpl implements EmsTemplateService {
 			emsTemplateDetal.setValue(generalTemplate.getText());//保存扩展属性（内容）
 			
 			emsTemplateMapper.addEmsTemplateDetal(emsTemplateDetal);
+			
+			editEmsMsgTempId(emsTempId,generalTemplate.getEmsMsgId());
 		} catch (Exception e) {
 			logger.info(e.getMessage());
 			e.printStackTrace();

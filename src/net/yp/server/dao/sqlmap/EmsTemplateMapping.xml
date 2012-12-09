@@ -28,6 +28,11 @@
 		where puuid=#{puuid,jdbcType=VARCHAR}
 	</select>
 	
+	<!-- 查询序列 -->
+	<select id="queryEmsTemplastSeqId" resultType="Long">
+		SELECT last_insert_id() as id FROM tb_ems_template topic limit 1
+	</select>
+	
 	<!-- 根据ID查询模板 -->
 	<select id="queryEmsTemplateByUUId" parameterType="Map" resultType="EmsTemplate">
 		select id,uuid,name,type,createTime,context from tb_ems_template

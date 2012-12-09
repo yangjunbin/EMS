@@ -20,6 +20,15 @@ public class QaTemplate {
 	 * 问题列表
 	 */
 	private List<QuestionAndAnswer> questions;
+	
+	private int emsMsgId;
+	
+	public int getEmsMsgId() {
+		return emsMsgId;
+	}
+	public void setEmsMsgId(int emsMsgId) {
+		this.emsMsgId = emsMsgId;
+	}
 	public String getPictureUrl() {
 		return pictureUrl;
 	}
