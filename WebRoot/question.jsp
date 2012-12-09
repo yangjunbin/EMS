@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   <body>
   		总记录数:${size}<br>
-        	<table style="text-align: left; width: 100%;" border="1">
+  <table style="text-align: left; width: 100%;" border="1">
 		<tr>
 			<td>uuid</td>
 			<td>name</td>
@@ -54,16 +54,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-  <link rel="stylesheet" href="assets/stylesheets/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/stylesheets/common.css" />
+  <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="stylesheets/common.css" />
   <style>
-  #content { width:640px; height:10em; }
-  .choose_template { overflow:hidden; }
-  .choose_template li { float:left; list-style:none; width:200px; margin:0 10px; }
-  .preview { width:200px; height:240px; border:1px solid #e2e2e2; background:#efefef; }
-  .template_name, .action { text-align:center; }
-  #step-two { margin:10px 0 30px; overflow:hidden; }
-  #step-two .control-group { margin:20px 0; }
+  .option { margin:0 10px 0 0; }
   </style>
 </head>
 <body>
@@ -82,7 +76,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </div>
 
   <div class="container">
-
+    <div class="title">
+      <h2>问题列表</h2>
+      <a class="action btn btn-primary" href="#">创建新问题</a>
+    </div>
+    <div class="content">
+      <table class="table table-bordered table-striped">
+        <tr>
+          <td>（单/多）选</td>
+          <td>问题</td>
+        </tr>
+        <c:forEach var="questionAndAnswer" items="${questionAndAnswers}">
+          <tr>
+            <td>${questionAndAnswer.question.type}(单选还是多选)</td>
+            <td>
+              <p>${questionAndAnswer.question.name}</p>
+              <p>
+                <c:forEach var="answer" items="${questionAndAnswer.answers}">
+                  <span class="option">${answer.context}</span>
+                </c:forEach>
+              </p>
+            </td>
+          </tr>
+        </c:forEach>
+      </table>
+    </div>
   </div>
 </body>
 </html>
