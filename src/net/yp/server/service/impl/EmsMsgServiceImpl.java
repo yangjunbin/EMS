@@ -117,7 +117,7 @@ public class EmsMsgServiceImpl implements EmsMsgService {
 	}
 
 	public EmsMsg queryEmsMsgDetal(EmsMsg emsMsg) {
-		String tempId = emsMsg.getTuuid();
+		String tempId = emsMsg.getTid()+"";
 		Map<String,Object> params = new HashMap<String,Object>();
 		params.put("uuid", tempId);
 		EmsTemplate emsTemplate = emsTemplateMapper.queryEmsTemplateById(params);
@@ -189,6 +189,10 @@ public class EmsMsgServiceImpl implements EmsMsgService {
 			emsMsg.setPublicityTemplate(publicityTemplate);
 		}	
 		return emsMsg;
+	}
+
+	public Integer queryEmsMsglastSeqId() {
+		return emsMsgMapper.queryEmsMsglastSeqId();
 	}
 
 }

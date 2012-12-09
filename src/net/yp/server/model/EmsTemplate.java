@@ -12,7 +12,7 @@ public class EmsTemplate {
 	private String status;
 	private String context;
 	private List<EmsTemplateDetal> emsTemplateDetals;
-	
+
 	public String getUuid() {
 		return uuid;
 	}

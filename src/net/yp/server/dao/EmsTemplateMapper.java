@@ -37,6 +37,12 @@ public interface EmsTemplateMapper {
 	List<EmsTemplateDetal> queryEmsTemplateDetal(Map<String,Object> params);
 	
 	/**
+	 * 查询序列
+	 * @return
+	 */
+	Integer queryEmsTemplastSeqId();
+	
+	/**
 	 * 根据ID查询模板
 	 * @param params
 	 * @return

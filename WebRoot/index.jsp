@@ -27,7 +27,7 @@ if(!"success".equals(request.getSession().getAttribute("status")))
       <a class="brand" href="#">网信平台</a>
       <ul class="nav">
         <li class="active"><a href="/">首页</a></li>
-        <li><a href="EmsMsgServlet?type=query">网信管理</a></li>
+        <li><a href="nms/new.jsp">网信管理</a></li>
         <li><a href="#">模板</a></li>
         <li><a href="QuestionBankServlet?type=query">题库</a></li>
         <li><a href="UserGroupServlet?type=query">联系人</a></li>

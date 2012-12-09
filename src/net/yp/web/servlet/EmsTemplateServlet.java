@@ -82,6 +82,7 @@ public class EmsTemplateServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
+		String emsMsgId = request.getParameter("emsMsgId");
         String result = "SUCCESS";
         String status = Constant.RESULT_SUCCESS;
 		String type = request.getParameter("type");
@@ -149,7 +150,7 @@ public class EmsTemplateServlet extends HttpServlet {
 //			BufferedImage image = ImageIO.read(is);
 //			String filePath = EmsUtil.getPropertiesForName("imagePath")+qaTemplate.getPictureName();
 //		    File outputFile = new File(filePath);
-//			ImageIO.write(image, qaTemplate.getPictureType(), outputFile);//将文件写入磁盘
+//			ImageIO.write(image, qaTmplate.getPictureType(), outputFile);//将文件写入磁盘
 //			qaTemplate.setPictureUrl(filePath);
 			
 		}

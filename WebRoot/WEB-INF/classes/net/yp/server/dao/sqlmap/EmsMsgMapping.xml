@@ -5,36 +5,41 @@
 
 	<!-- 新增网信信息 -->
 	<insert id="addEmsMsg" parameterType="EmsMsg">
-		insert into tb_ems_msg(uuid,msg,tuuid,uuuid,createTime,status)
-		values(#{uuid,jdbcType=VARCHAR},#{msg,jdbcType=VARCHAR},#{tuuid,jdbcType=VARCHAR},
-		#{uuuid,jdbcType=VARCHAR},now(),#{status,jdbcType=VARCHAR})
+		insert into tb_ems_msg(name,uuid,msg,tid,uid,createTime,status)
+		values(#{name,jdbcType=VARCHAR},#{uuid,jdbcType=VARCHAR},#{msg,jdbcType=VARCHAR},#{tid,jdbcType=NUMERIC},
+		#{uid,jdbcType=NUMERIC},now(),#{status,jdbcType=VARCHAR})
 	</insert>
 	
 	<!-- 修改网信信息 -->
 	<update id="editEmsMsg" parameterType="EmsMsg">
-		update tb_ems_msg set msg=#{msg,jdbcType=VARCHAR},tuuid=#{tuuid,jdbcType=VARCHAR},
-		uuuid=#{uuuid,jdbcType=VARCHAR} where id=#{id,jdbcType=VARCHAR}
+		update tb_ems_msg set name=#{name,jdbcType=VARCHAR},msg=#{msg,jdbcType=VARCHAR},tid=#{tid,jdbcType=NUMERIC},
+		uid=#{uid,jdbcType=NUMERIC} where id=#{id,jdbcType=VARCHAR}
 	</update>
 	
 	<!-- 修改网信信息状态 -->
 	<update id="editEmsMsgStatus" parameterType="EmsMsg">
-		update tb_ems_msg set status=#{status,jdbcType=VARCHAR} where uuid=#{uuid,jdbcType=VARCHAR}
+		update tb_ems_msg set status=#{status,jdbcType=VARCHAR} where id=#{id,jdbcType=NUMERIC}
 	</update>
 	
 	<!-- 删除网信信息 -->
 	<delete id="delEmsMsg" parameterType="String">
-		delete from tb_ems_msg where uuid=#{uuid,jdbcType=VARCHAR}
+		delete from tb_ems_msg where id=#{id,jdbcType=NUMERIC}
 	</delete>
 	
 	<!-- 查询网信信息 -->
 	<select id="queryEmsMsg" parameterType="Map" resultType="EmsMsg">
-		select t1.id,t1.uuid,t1.msg,t1.tuuid,t2.name tname,t1.uuuid,t3.user uname,t1.createTime,t1.status from tb_ems_msg t1,tb_ems_template t2,tb_login_user t3
-		where t1.tuuid=t2.uuid and t1.uuuid=t3.uuid
+		select t1.name,t1.id,t1.uuid,t1.msg,t1.tuuid,t2.name tname,t1.uid,t3.user uname,t1.createTime,t1.status from tb_ems_msg t1,tb_ems_template t2,tb_login_user t3
+		where t1.tid=t2.id and t1.uid=t3.uuid
 		<include refid="CommonMapper.mysqlPaging"/>
 	</select>
 	
 	<!-- 查询网信信息记录数 -->
 	<select id="queryEmsMsgCount" parameterType="Map" resultType="Long">
 		select count(1) from tb_ems_msg
+	</select>
+	
+	<!-- 查询序列 -->
+	<select id="queryEmsMsglastSeqId" resultType="Integer">
+		SELECT last_insert_id() as id FROM tb_ems_msg topic limit 1
 	</select>
 </mapper>	

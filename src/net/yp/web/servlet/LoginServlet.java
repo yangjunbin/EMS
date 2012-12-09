@@ -99,6 +99,7 @@ public class LoginServlet extends HttpServlet {
 				if(pwd.equals(loginUser.getPwd()))
 				{
 					request.getSession().setAttribute("status", "success");
+					request.getSession().setAttribute("uid",loginUser.getId());
 					request.getRequestDispatcher("/index.jsp").forward(request, response);
 				}
 				else
