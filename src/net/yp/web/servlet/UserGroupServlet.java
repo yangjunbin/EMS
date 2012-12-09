@@ -64,7 +64,7 @@ public class UserGroupServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		String type = request.getParameter("type");
-		String useruuId = request.getParameter("useruuId");
+		String userId = request.getParameter("userId");
 		String name = request.getParameter("name");
 		String result = "";
 		if ("query".equals(type)) {
@@ -73,7 +73,7 @@ public class UserGroupServlet extends HttpServlet {
 			Map<String,Object> params = new HashMap<String,Object>();
 			params.put("page", page==null?0:Integer.parseInt(page)*Integer.parseInt(pageSize));
 			params.put("pageSize", pageSize==null?5:Integer.parseInt(pageSize));
-			List<UserGroup> userGroups = userService.queryUserGroup(null);
+			List<UserGroup> userGroups = userService.queryUserGroup(params);
 			long size = userService.queryUserGroupCount(params);
 			request.setAttribute("size", size);
 			request.setAttribute("userGroups", userGroups);
@@ -81,20 +81,23 @@ public class UserGroupServlet extends HttpServlet {
 					response);
 		} else if ("add".equals(type)) {
 			UserGroup userGroup = new UserGroup();
-			userGroup.setUuid(useruuId);
+			userGroup.setUuid(Constant.getUUID());
 			userGroup.setName(name);
 			List<UserGroup> userGroups = new ArrayList<UserGroup>();
 			userGroups.add(userGroup);
 			result = userService.addUserGroup(userGroups);
 		} else if ("edit".equals(type)) {
-
+			UserGroup userGroup = new UserGroup();
+			userGroup.setId(userId);
+			userGroup.setName(name);
+			result = userService.editUserGroup(userGroup);
 		} else if ("del".equals(type)) {
 			UserGroup userGroup = new UserGroup();
-			userGroup.setUuid(useruuId);
+			userGroup.setId(userId);
 			userGroup.setName(name);
-			List<String> uuids = new ArrayList<String>();
-			uuids.add(useruuId);
-			result = userService.delUserGroup(uuids);
+			List<String> ids = new ArrayList<String>();
+			ids.add(userId);
+			result = userService.delUserGroup(ids);
 		}
 		PrintWriter out = response.getWriter();
 		out.print(EmsUtil.getJsonResult(Constant.RESULT_SUCCESS, result));

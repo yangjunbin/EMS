@@ -63,8 +63,8 @@
                     <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="UserMsgServlet?groupId=${userGroup.id}">查看</a></li>
-                    <li><a href="UserMsgServlet?groupId=${userGroup.id}&type=del">删除</a></li>
+                    <li><a href="UserMsgServlet?type=query&groupId=${userGroup.id}">查看</a></li>
+                    <li><a href="UserMsgServlet?type=del&groupId=${userGroup.id}&type=del">删除</a></li>
                   </ul>
                 </div>
               </td>

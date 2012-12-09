@@ -69,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <div class="control-group">
             <div class="controls">
               <input type="hidden" value="edit" id="type" name="type"/>
-              <input type="hidden" value="${param.id}" id="id" name="id"/>
+              <input type="hidden" value="${param.uuid}" id="uuid" name="uuid"/>
               <button type="submit" class="btn">创建</button>
             </div>
           </div>

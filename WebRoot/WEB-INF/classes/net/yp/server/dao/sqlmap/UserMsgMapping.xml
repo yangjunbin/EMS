@@ -21,23 +21,23 @@
 	<select id="queryUserMsgByGroup" parameterType="Map" resultType="UserMsg">
 		select t1.id,t1.uuid,t1.name,t1.phoneNumber from tb_user_msg
 		t1,tb_user_group_rel t2,tb_user_group t3
-		where t1.uuid=t2.msguuId and
-		t2.groupuuId=t3.uuid and t2.groupuuId=#{groupuuId,jdbcType=VARCHAR}
+		where t1.id=t2.msgId and
+		t2.groupId=t3.id and t3.id=#{id,jdbcType=NUMERIC}
 		<include refid="CommonMapper.mysqlPaging"/>
 	</select>
 	
 	<!-- 查询未分组联系人信息 -->
 	<select id="queryUngroupedUserMsg" parameterType="Map" resultType="UserMsg">
 		select t1.id,t1.uuid,t1.name,t1.phoneNumber from tb_user_msg t1
-		where t1.uuid not in(select t2.msguuId from tb_user_group_rel t2)
+		where t1.uuid not in(select t2.msgId from tb_user_group_rel t2)
 	</select>
 	
 	<!-- 根据组获取联系人信息记录数 -->
 	<select id="queryUserMsgByGroupCount" parameterType="Map" resultType="Long">
 		select count(1) from tb_user_msg
 		t1,tb_user_group_rel t2,tb_user_group t3
-		where t1.uuid=t2.msguuId and
-		t2.groupuuId=t3.uuid and t2.groupuuId=#{groupuuId,jdbcType=VARCHAR}
+		where t1.id=t2.msgId and
+		t2.groupId=t3.id and t3.id=#{id,jdbcType=NUMERIC}
 	</select>
 	
 	<!-- 根据联系人姓名和电话号码判断是否已存在 -->
@@ -55,12 +55,12 @@
 	<!-- 更新联系人信息 -->
 	<update id="editUserMsg" parameterType="UserMsg">
 		update tb_user_msg set name=#{name,jdbcType=VARCHAR},phoneNumber=#{phoneNumber,jdbcType=VARCHAR}
-		where uuid=#{uuid,jdbcType=VARCHAR}
+		where id=#{id,jdbcType=NUMERIC}
 	</update>
 	
 	<!-- 删除联系人信息 -->
 	<delete id="delUserMsg" parameterType="String">
-		delete from tb_user_msg where uuid=#{uuid,jdbcType=VARCHAR}
+		delete from tb_user_msg where id=#{id,jdbcType=NUMERIC}
 	</delete>
 	
 	<!-- 新增联系人分组 -->
@@ -70,21 +70,24 @@
 	
 	<!-- 修改联系人分组 -->
 	<update id="editUserGroup" parameterType="UserGroup">
-		update tb_user_group set name=#{name,jdbcType=VARCHAR} where uuid=#{uuid,jdbcType=VARCHAR}
+		update tb_user_group set name=#{name,jdbcType=VARCHAR} where id=#{id,jdbcType=NUMERIC}
 	</update>
 	
 	<!-- 删除用户 -->
 	<delete id="delUserGroup" parameterType="String">
-		delete from tb_user_group where uuid=#{uuid,jdbcType=VARCHAR}
+		delete from tb_user_group where id=#{id,jdbcType=NUMERIC}
 	</delete>
 	
 	<!-- 新增联系人与分组的关联 -->
 	<insert id="addUserGroupRel" parameterType="UserGroupRel">
-		insert into tb_user_group_rel(msguuId,groupuuId)values(#{msguuId,jdbcType=VARCHAR},#{groupuuId,jdbcType=VARCHAR})
+		insert into tb_user_group_rel(msgId,groupId)values(#{msgId,jdbcType=VARCHAR},#{groupId,jdbcType=VARCHAR})
 	</insert>
 	
 	<!-- 删除联系人与分组的关联 -->
 	<delete id="delUserGroupRel" parameterType="UserGroupRel">
-		delete from tb_user_group_rel where msguuId=#{msguuId,jdbcType=VARCHAR} and groupuuId=#{groupuuId,jdbcType=VARCHAR}
+		delete from tb_user_group_rel where groupId=#{groupId,jdbcType=VARCHAR}
+		<if test="msgId!=null and msgId>0">
+			and msgId=#{msgId,jdbcType=VARCHAR} 
+		</if>
 	</delete>
 </mapper>	

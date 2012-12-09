@@ -13,7 +13,7 @@
 	<!-- 修改网信信息 -->
 	<update id="editEmsMsg" parameterType="EmsMsg">
 		update tb_ems_msg set msg=#{msg,jdbcType=VARCHAR},tuuid=#{tuuid,jdbcType=VARCHAR},
-		uuuid=#{uuuid,jdbcType=VARCHAR} where uuid=#{uuid,jdbcType=VARCHAR}
+		uuuid=#{uuuid,jdbcType=VARCHAR} where id=#{id,jdbcType=VARCHAR}
 	</update>
 	
 	<!-- 修改网信信息状态 -->

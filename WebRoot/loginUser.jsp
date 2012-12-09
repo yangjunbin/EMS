@@ -80,8 +80,8 @@
                     <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="editLoginUser.jsp?user=${loginUser.user}&name=${loginUser.name}&sex=${loginUser.sex}&pwd=${loginUser.pwd}&id=${loginUser.id}" >删除</a></li>
-                    <li><a href="LoginUserServlet?type=del&id=${loginUser.id}" >修改</a></li>
+                    <li><a href="editLoginUser.jsp?user=${loginUser.user}&name=${loginUser.name}&sex=${loginUser.sex}&pwd=${loginUser.pwd}&id=${loginUser.uuid}" >修改</a></li>
+                    <li><a href="LoginUserServlet?type=del&uuid=${loginUser.uuid}" >删除</a></li>
                   </ul>
                 </div>
               </td>

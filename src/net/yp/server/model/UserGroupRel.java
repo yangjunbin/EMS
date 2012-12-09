@@ -6,19 +6,18 @@ package net.yp.server.model;
  *
  */
 public class UserGroupRel {
-	private String msguuId;
-	private String groupuuId;
-	public String getMsguuId() {
-		return msguuId;
+	private String msgId;
+	private String groupId;
+	public String getMsgId() {
+		return msgId;
 	}
-	public void setMsguuId(String msguuId) {
-		this.msguuId = msguuId;
+	public void setMsgId(String msgId) {
+		this.msgId = msgId;
 	}
-	public String getGroupuuId() {
-		return groupuuId;
+	public String getGroupId() {
+		return groupId;
 	}
-	public void setGroupuuId(String groupuuId) {
-		this.groupuuId = groupuuId;
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
 	}
-	
 }
