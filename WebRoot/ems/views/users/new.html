@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <link rel="stylesheet" href="../../assets/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="../../assets/stylesheets/common.css" />
+  <style>
+  #content { width:640px; height:10em; }
+  </style>
+</head>
+<body>
+  <!--导航-->
+  <div class="navbar">
+    <div class="navbar-inner container">
+      <a class="brand" href="#">网信平台</a>
+      <ul class="nav">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">网信管理</a></li>
+        <li><a href="#">模板</a></li>
+        <li class="active"><a href="#">联系人</a></li>
+        <li><a href="#">管理员</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!--内容-->
+  <div class="container nms">
+    <div class="content">
+      <form class="form-horizontal">
+        <fieldset>
+          <legend>创建联系人</legend>
+          <div class="control-group">
+            <label class="control-label" for="inputEmail">姓名</label>
+            <div class="controls">
+              <input type="text" id="inputName" placeholder="输入联系人名称">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="inputPassword">手机号码</label>
+            <div class="controls">
+              <input type="text" id="inputTel" placeholder="输入联系人电话号码">
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <button type="submit" class="btn">创建</button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
