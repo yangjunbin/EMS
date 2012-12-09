@@ -75,7 +75,7 @@ public class LoginServiceImpl implements LoginService {
 		Integer result = 0;
 		try {
 			result = loginMapper.editLoginUserStatus(loginUser);
-			loginMapper.editLoginUserLoginTime(loginUser.getId());
+			loginMapper.editLoginUserLoginTime(loginUser.getUuid());
 		} catch (Exception e) {
 			logger.debug(e.getMessage());
 			e.printStackTrace();

@@ -2,8 +2,6 @@ package net.yp.web.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,11 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
 import net.yp.server.model.Answer;
-import net.yp.server.model.Question;
 import net.yp.server.model.QuestionAndAnswer;
 import net.yp.server.service.QuestionBankService;
 import net.yp.server.util.Context;

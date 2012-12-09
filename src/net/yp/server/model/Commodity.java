@@ -3,7 +3,8 @@ package net.yp.server.model;
 import java.util.Date;
 
 public class Commodity {
-	private String id;
+	private String uuid;
+	private int id;
 	private String name;
 	private Date createTime;
 	private String costPrice;
@@ -11,17 +12,23 @@ public class Commodity {
 	private String context;
 	private String filePath;
 	
+	public String getUuid() {
+		return uuid;
+	}
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getFilePath() {
 		return filePath;
 	}
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
 	}
 	public String getName() {
 		return name;

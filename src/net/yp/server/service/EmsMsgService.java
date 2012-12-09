@@ -30,10 +30,10 @@ public interface EmsMsgService {
 	
 	/**
 	 * 删除网信信息
-	 * @param id
+	 * @param uuid
 	 * @return
 	 */
-	String delEmsMsg(String id);
+	String delEmsMsg(String uuid);
  
 	/**
 	 * 查询网信信息
@@ -41,6 +41,13 @@ public interface EmsMsgService {
 	 * @return
 	 */
 	List<EmsMsg> queryEmsMsg(Map<String,Object> params);
+	
+	/**
+	 * 查询网信详细信息
+	 * @param emsMsg
+	 * @return
+	 */
+	EmsMsg queryEmsMsgDetal(EmsMsg emsMsg);
 	
 	/**
 	 * 查询网信信息记录数

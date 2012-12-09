@@ -24,10 +24,10 @@ public interface QuestionBankMapper {
 	
 	/**
 	 * 删除问题
-	 * @param id
+	 * @param uuid
 	 * @return
 	 */
-	Integer delQuestion(String id);
+	Integer delQuestion(String uuid);
 	
 	/**
 	 * 新增答案
@@ -58,6 +58,12 @@ public interface QuestionBankMapper {
 	List<Question> queryQuestion(Map<String,Object> params);
 	
 	/**
+	 * 根据问题ID查询问题信息
+	 * @param uuid
+	 * @return
+	 */
+	Question queryQuestionById(String uuid);
+	/**
 	 * 查询问题记录数
 	 * @return
 	 */
@@ -65,8 +71,8 @@ public interface QuestionBankMapper {
 	
 	/**
 	 * 查询答案
-	 * @param qid
+	 * @param quuid
 	 * @return
 	 */
-	List<Answer> queryAnswer(String qid);
+	List<Answer> queryAnswer(String quuid);
 }

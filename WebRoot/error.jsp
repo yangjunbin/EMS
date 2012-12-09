@@ -23,6 +23,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    密码错误<br>
+    ${errorMsg}<br>
   </body>
 </html>

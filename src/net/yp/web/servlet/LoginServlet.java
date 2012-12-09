@@ -70,7 +70,7 @@ public class LoginServlet extends HttpServlet {
 		else
 		{
 			Date loginTime = loginUser.getLoginTime();
-			loginService.editLoginUserLoginTime(loginUser.getId());
+			loginService.editLoginUserLoginTime(loginUser.getUuid());
 			if(loginUser.getStatus()==Constant.LOGIN_USER_FREEZE_STATUS&&new Date().getTime()-loginTime.getTime() < 1000*60*10)
 			{
 		        PrintWriter out = response.getWriter();
@@ -93,6 +93,7 @@ public class LoginServlet extends HttpServlet {
 				}
 				if(pwd.equals(loginUser.getPwd()))
 				{
+					request.getSession().setAttribute("status", "success");
 					request.getRequestDispatcher("/index.jsp").forward(request, response);
 				}
 				else

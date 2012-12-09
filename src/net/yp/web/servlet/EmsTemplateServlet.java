@@ -105,13 +105,13 @@ public class EmsTemplateServlet extends HttpServlet {
 	                    }
 	                    else if("questionIds".equals(name))
 	                    {
-	                    	String[] ids = value.split(",");
+	                    	String[] uuids = value.split(",");
 	                    	 List<QuestionAndAnswer> questions = new ArrayList<QuestionAndAnswer>();
-	                    	for(String id : ids)
+	                    	for(String uuid : uuids)
 	                    	{
 	                    		QuestionAndAnswer questionAndAnswer = new QuestionAndAnswer();
 	                    		Question question = new Question();
-	                    		question.setId(id);
+	                    		question.setUuid(uuid);
 	                    		questionAndAnswer.setQuestion(question);
 	                    		questions.add(questionAndAnswer);
 	                    	}
@@ -172,12 +172,12 @@ public class EmsTemplateServlet extends HttpServlet {
 	                    }
 	                    else if("commodityIds".equals(name))
 	                    {
-	                    	String[] ids = value.split(",");
+	                    	String[] uuids = value.split(",");
 	                    	List<Commodity> commoditys = new ArrayList<Commodity>();
-	                    	for(String id : ids)
+	                    	for(String uuid : uuids)
 	                    	{
 	                    		Commodity commodity = new Commodity();
-	                    		commodity.setId(id);
+	                    		commodity.setUuid(uuid);
 	                    		commoditys.add(commodity);
 	                    	}
 	                    	publicityTemplate.setCommoditys(commoditys);
@@ -297,7 +297,7 @@ public class EmsTemplateServlet extends HttpServlet {
 		        		    commodity.setFilePath(filePath);
 		                }
 		            }
-		            commodity.setId(Constant.getUUID());
+		            commodity.setUuid(Constant.getUUID());
 		            commodityService.addCommodity(commodity);
 		            result = JSONObject.fromObject(commodity).toString();
 

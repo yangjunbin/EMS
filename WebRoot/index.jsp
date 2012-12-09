@@ -1,8 +1,18 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+if(!"success".equals(request.getSession().getAttribute("status")))
+{
+	request.setAttribute("errorMsg", "请先登陆");
+	request.getRequestDispatcher("/error.jsp").forward(request, response);
+}
+%>
 <html>
 <head>
-  <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
-  <link rel="stylesheet" href="/stylesheets/common.css" />
+  <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="stylesheets/common.css" />
   <style>
   .container .inner { width:940px; }
   .title { position:relative; }

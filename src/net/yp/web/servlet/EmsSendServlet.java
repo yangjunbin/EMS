@@ -60,7 +60,7 @@ public class EmsSendServlet extends HttpServlet {
 			for (String number : numbers)
 			{
 				EmsSend emsSend = new EmsSend();
-				emsSend.setId(Constant.getUUID());
+				emsSend.setUuid(Constant.getUUID());
 				emsSend.setSendText(sendText);
 				emsSend.setPhoneNumber(number);
 				emsSends.add(emsSend);
@@ -75,6 +75,8 @@ public class EmsSendServlet extends HttpServlet {
 			params.put("page", page==null?0:Integer.parseInt(page)*Integer.parseInt(pageSize));
 			params.put("pageSize", pageSize==null?5:Integer.parseInt(pageSize));
 			List<EmsSend> emsSends = emsSendService.queryEmsSend(params);
+			long size = emsSendService.queryEmsSendCount(params);
+			request.setAttribute("size", size);
 			request.setAttribute("emsSends", emsSends);
 			request.getRequestDispatcher("/emsSend.jsp").forward(request, response);
 		}

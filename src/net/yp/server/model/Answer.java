@@ -2,14 +2,22 @@ package net.yp.server.model;
 
 public class Answer {
 	
-	private String id;
+	private int id;
+	private String uuid;
 	private String qid;
 	private String context;
-	public String getId() {
+	
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
+	}
+	public String getUuid() {
+		return uuid;
+	}
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
 	public String getQid() {
 		return qid;

@@ -57,32 +57,32 @@ public class UserGroupRelServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		String type = request.getParameter("type");
-		String groupId = request.getParameter("groupId");
-		String userId = request.getParameter("userId");
+		String groupuuId = request.getParameter("groupuuId");
+		String useruuId = request.getParameter("useruuId");
 		String result = "";
 		if("add".equals(type))
 		{
-			String[] userIds = userId.split(",");
+			String[] useruuIds = useruuId.split(",");
 			List<UserGroupRel>userGroupRels = new ArrayList<UserGroupRel>();
-			int count = userIds.length;
+			int count = useruuIds.length;
 			for(int i=0;i<count;i++)
 			{
 				UserGroupRel userGroupRel = new UserGroupRel();
-				userGroupRel.setMsgId(userIds[i]);
-				userGroupRel.setGroupId(groupId);
+				userGroupRel.setMsguuId(useruuIds[i]);
+				userGroupRel.setGroupuuId(groupuuId);
 			}
 			result = userService.addUserGroupRel(userGroupRels);
 		}
 		else if("del".equals(type))
 		{
-			String[] userIds = userId.split(",");
+			String[] useruuIds = useruuId.split(",");
 			List<UserGroupRel>userGroupRels = new ArrayList<UserGroupRel>();
-			int count = userIds.length;
+			int count = useruuIds.length;
 			for(int i=0;i<count;i++)
 			{
 				UserGroupRel userGroupRel = new UserGroupRel();
-				userGroupRel.setMsgId(userIds[i]);
-				userGroupRel.setGroupId(groupId);
+				userGroupRel.setMsguuId(useruuIds[i]);
+				userGroupRel.setGroupuuId(groupuuId);
 			}
 			result = userService.delUserGroupRel(userGroupRels);
 		}

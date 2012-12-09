@@ -53,10 +53,16 @@ public class UserMsgServlet extends HttpServlet {
 		
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
-		String groupId = request.getParameter("groupId");
+		String groupuuId = request.getParameter("groupuuId");
 		Map<String,Object> params = new HashMap<String,Object>();
-		params.put("groupId", groupId);
+		params.put("groupuuId", groupuuId);
 		List<UserMsg> userMsgs = userService.queryUserMsgByGroup(params);
+		String page = request.getParameter("page");
+		String pageSize = request.getParameter("pageSize");
+		params.put("page", page==null?0:Integer.parseInt(page)*Integer.parseInt(pageSize));
+		params.put("pageSize", pageSize==null?5:Integer.parseInt(pageSize));
+		long size = userService.queryUserMsgByGroupCount(params);
+		request.setAttribute("size", size);
 		request.setAttribute("userMsgs", userMsgs);
 		request.getRequestDispatcher("/userMsg.jsp").forward(request, response);
 	}

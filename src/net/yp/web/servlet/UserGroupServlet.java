@@ -3,7 +3,9 @@ package net.yp.web.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -62,17 +64,24 @@ public class UserGroupServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		String type = request.getParameter("type");
-		String userId = request.getParameter("userId");
+		String useruuId = request.getParameter("useruuId");
 		String name = request.getParameter("name");
 		String result = "";
 		if ("query".equals(type)) {
+			String page = request.getParameter("page");
+			String pageSize = request.getParameter("pageSize");
+			Map<String,Object> params = new HashMap<String,Object>();
+			params.put("page", page==null?0:Integer.parseInt(page)*Integer.parseInt(pageSize));
+			params.put("pageSize", pageSize==null?5:Integer.parseInt(pageSize));
 			List<UserGroup> userGroups = userService.queryUserGroup(null);
+			long size = userService.queryUserGroupCount(params);
+			request.setAttribute("size", size);
 			request.setAttribute("userGroups", userGroups);
 			request.getRequestDispatcher("/userGroup.jsp").forward(request,
 					response);
 		} else if ("add".equals(type)) {
 			UserGroup userGroup = new UserGroup();
-			userGroup.setId(userId);
+			userGroup.setUuid(useruuId);
 			userGroup.setName(name);
 			List<UserGroup> userGroups = new ArrayList<UserGroup>();
 			userGroups.add(userGroup);
@@ -81,11 +90,11 @@ public class UserGroupServlet extends HttpServlet {
 
 		} else if ("del".equals(type)) {
 			UserGroup userGroup = new UserGroup();
-			userGroup.setId(userId);
+			userGroup.setUuid(useruuId);
 			userGroup.setName(name);
-			List<String> ids = new ArrayList<String>();
-			ids.add(userId);
-			result = userService.delUserGroup(ids);
+			List<String> uuids = new ArrayList<String>();
+			uuids.add(useruuId);
+			result = userService.delUserGroup(uuids);
 		}
 		PrintWriter out = response.getWriter();
 		out.print(EmsUtil.getJsonResult(Constant.RESULT_SUCCESS, result));
