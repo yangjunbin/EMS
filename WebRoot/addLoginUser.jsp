@@ -4,32 +4,76 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'addLoginUser.jsp' starting page</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+<head>
+  <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="stylesheets/common.css" />
+  <style>
+  #content { width:640px; height:10em; }
+  </style>
+</head>
+<body>
+  <!--导航-->
+  <div class="navbar">
+    <div class="navbar-inner container">
+      <a class="brand" href="#">网信平台</a>
+      <ul class="nav">
+        <li><a href="#">首页</a></li>
+        <li><a href="#">网信管理</a></li>
+        <li><a href="#">模板</a></li>
+        <li><a href="#">联系人</a></li>
+        <li class="active"><a href="#">管理员</a></li>
+      </ul>
+    </div>
+  </div>
 
-  </head>
-  
-  <body>
-  	<form action="LoginUserServlet">
-  		user:<input type="text" id="user" name="user"/><br>
-  		pwd:<input type="text" id="pwd" name="pwd"/><br>
-  		name:<input type="text" id="name" name="name"/><br>
-  		sex:<input type="text" id="sex" name="sex"/><br>
-  		<input type="hidden" value="add" id="type" name="type"/>
-  		<input type="submit" value="submit"/>
-  	</form>
-  </body>
+  <!--内容-->
+  <div class="container nms">
+    <div class="content">
+      <form class="form-horizontal" action="LoginUserServlet" method="post">
+        <fieldset>
+          <legend>创建管理员</legend>
+          <div class="control-group">
+            <label class="control-label" for="username">用户名</label>
+            <div class="controls">
+              <input type="text" id="username" name="user" placeholder="输入用户名">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="password">密码</label>
+            <div class="controls">
+              <input type="password" name="pwd" id="password">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="name">姓名</label>
+            <div class="controls">
+              <input type="text" name="name" id="name">
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="sex">性别</label>
+            <div class="controls">
+              <label class="radio">
+                <input type="radio" name="sex" id="optionsRadios1" value="1" checked>
+                男
+              </label>
+              <label class="radio">
+                <input type="radio" name="sex" id="optionsRadios2" value="2">
+                女
+              </label>
+            </div>
+          </div>
+          <div class="control-group">
+            <div class="controls">
+              <input type="hidden" value="add" id="type" name="type"/>
+              <button type="submit" class="btn">创建</button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</body>
 </html>

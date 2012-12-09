@@ -1,30 +1,107 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'index.jsp' starting page</title>
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-  </head>
-  
-  <body>
-    <a href="UserGroupServlet?type=query">联系人</a><br>
-    <a href="LoginUserServlet?type=query">用户</a><br>
-    <a href="EmsSendServlet?type=query">发送信息</a><br>
-    <a href="EmsMsgServlet?type=query">网信信息</a><br>
-    <a href="QuestionBankServlet?type=query">题库</a>
-  </body>
+<head>
+  <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="/stylesheets/common.css" />
+  <style>
+  .container .inner { width:940px; }
+  .title { position:relative; }
+  .title h2 { font-size:20px; font-weight:normal; border-bottom:1px solid #efefef; margin-bottom:15px; }
+  .title .action { position:absolute; right:0; top:5px; }
+  </style>
+</head>
+<body>
+  <!--导航-->
+  <div class="navbar">
+    <div class="navbar-inner container">
+      <a class="brand" href="#">网信平台</a>
+      <ul class="nav">
+        <li class="active"><a href="/">首页</a></li>
+        <li><a href="EmsMsgServlet?type=query">网信管理</a></li>
+        <li><a href="#">模板</a></li>
+        <li><a href="QuestionBankServlet?type=query">题库</a></li>
+        <li><a href="UserGroupServlet?type=query">联系人</a></li>
+        <li><a href="LoginUserServlet?type=query">管理员</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!--内容-->
+  <div class="container users">
+    <div class="title">
+      <h2>联系人</h2>
+    </div>
+    <div class="content">
+      共有1923个联系人，12个联系人分组
+    </div>
+  </div>
+
+  <div class="container nms">
+    <div class="title">
+      <h2>网信</h2>
+      <a class="action btn btn-primary" href="#">创建新网信</a>
+    </div>
+    <div class="content">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>序号</th>
+            <th>名称</th>
+            <th>内容</th>
+            <th>时间</th>
+            <th>状态</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>zzz</td>
+            <td>xxx</td>
+            <td>vvv</td>
+            <td>bbb</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>zzz</td>
+            <td>xxx</td>
+            <td>vvv</td>
+            <td>bbb</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>zzz</td>
+            <td>xxx</td>
+            <td>vvv</td>
+            <td>bbb</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>zzz</td>
+            <td>xxx</td>
+            <td>vvv</td>
+            <td>bbb</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>zzz</td>
+            <td>xxx</td>
+            <td>vvv</td>
+            <td>bbb</td>
+          </tr>
+        </tbody>
+      </table>
+      <!--分页-->
+      <div class="pagination">
+        <ul>
+          <li class="disabled"><span>上一页</span></li>
+          <li class="active"><span>1</span></li>
+          <li><span>2</span></li>
+          <li><span>3</span></li>
+          <li><span>4</span></li>
+          <li><span>下一页</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
 </html>
