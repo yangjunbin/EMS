@@ -5,31 +5,42 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-<base href="<%=basePath%>">
-
-<title>My JSP 'login.jsp' starting page</title>
-
-<meta http-equiv="pragma" content="no-cache">
-<meta http-equiv="cache-control" content="no-cache">
-<meta http-equiv="expires" content="0">
-<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-<meta http-equiv="description" content="This is my page">
-<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-
+  <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="/stylesheets/common.css" />
+  <style>
+  .container .inner { width:940px; }
+  .title { position:relative; }
+  .title h2 { font-size:20px; font-weight:normal; border-bottom:1px solid #efefef; margin-bottom:15px; }
+  .title .action { position:absolute; right:0; top:5px; }
+  .container { width:600px; }
+  </style>
 </head>
-
 <body>
-	<form action="LoginServlet" method="post">
-		用户：<input type="text" id="user" name="user"/> <br>
-		密码：<input type="text" id="pwd" name="pwd"/> <br>
-		<input type="submit" value="submit" />
-	</form>
+  <!--导航-->
+  <div class="navbar">
+    <div class="navbar-inner container">
+      <a class="brand" href="#">网信平台</a>
+      <ul class="nav">
+        <li class="active"><a href="#">首页</a></li>
+        <li><a href="#">网信管理</a></li>
+        <li><a href="#">模板</a></li>
+        <li><a href="#">联系人</a></li>
+        <li><a href="#">管理员</a></li>
+      </ul>
+    </div>
+  </div>
 
+  <div class="container">
+    <form class="form-inline" action="LoginServlet" method="post">
+      <legend>登入</legend>
+      <input type="text" class="input-middle" name="user" placeholder="用户名">
+      <input type="password" class="input-middle" name="pwd" placeholder="密码">
+      <button type="submit" class="btn btn-primary">登入</button>
+      <button id="reset" type="reset" class="btn">取消</button>
+    </form>
+  </div>
 </body>
 </html>
