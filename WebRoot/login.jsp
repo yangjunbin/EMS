@@ -36,10 +36,12 @@
   <div class="container">
     <form class="form-inline" action="LoginServlet" method="post">
       <legend>登入</legend>
-      <input type="text" class="input-middle" name="user" placeholder="用户名">
+      <input type="text" class="input-middle" name="user" value="${user }" placeholder="用户名">
       <input type="password" class="input-middle" name="pwd" placeholder="密码">
       <button type="submit" class="btn btn-primary">登入</button>
       <button id="reset" type="reset" class="btn">取消</button>
+      <br/>
+      <label>${msg}</label>
     </form>
   </div>
 </body>

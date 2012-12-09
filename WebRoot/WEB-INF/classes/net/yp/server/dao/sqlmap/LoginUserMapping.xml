@@ -5,7 +5,7 @@
 
 	<!-- 获取所有的登陆用户信息 -->
 	<select id="queryLoginUsers" parameterType="Map" resultType="LoginUser">
-			select user,id,uuid,pwd,name,sex,str_to_date(regTime,'%Y-%m-%d %H:%i:%s') regTime,status,str_to_date(loginTime,'%Y-%m-%d %H:%i:%s') loginTime,errorCount from tb_login_user 
+			select user,id,uuid,pwd,name,sex,date_format(str_to_date(regTime,'%Y-%m-%d %H:%i:%s'),'%Y-%m-%d %H:%i:%s') regTime,status,date_format(loginTime,'%Y-%m-%d %H:%i:%s') loginTime,errorCount from tb_login_user 
 			<include refid="CommonMapper.mysqlPaging"/>
 	</select>
 	
@@ -47,7 +47,7 @@
 		set pwd=#{pwd,jdbcType=VARCHAR},
 		    name=#{name,jdbcType=VARCHAR},
 		    sex=#{sex,jdbcType=NUMERIC}
-		where uuid=#{uuid,jdbcType=VARCHAR}
+		where id=#{id,jdbcType=VARCHAR}
 	</update>
 	
 	<!-- 修改登陆用户状态 -->
@@ -61,18 +61,18 @@
     <update id="editLoginUserLoginTime" parameterType="String">
     	update tb_login_user
 		set loginTime=now()
-		where uuid=#{uuid,jdbcType=VARCHAR}
+		where id=#{id,jdbcType=VARCHAR}
     </update>
 	
 	<!-- 修改错误登陆次数 -->
 	<update id="editLoginUserErrorCount" parameterType="LoginUser">
 		update tb_login_user
 		set errorCount=#{errorCount,jdbcType=NUMERIC}
-		where uuid=#{uuid,jdbcType=VARCHAR}
+		where id=#{id,jdbcType=VARCHAR}
 	</update>
 	
 	<!-- 删除登陆用户 -->
 	<delete id="delLoginUser" parameterType="String">
-	    delete from tb_login_user where uuid = #{uuid,jdbcType=VARCHAR}
+	    delete from tb_login_user where id = #{id,jdbcType=VARCHAR}
 	</delete>
 </mapper>	

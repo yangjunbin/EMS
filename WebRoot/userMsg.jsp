@@ -85,7 +85,7 @@
 							<td>${userMsg.phoneNumber}</td>
 							<td><a href="UserMsgServlet?type=del&id=${userMsg.id}"
 								class="btn">删除</a> <a
-								href="UserMsgServlet?type=edit&username=${userMsg.name}&tel=userMsg.phoneNumber&id=${userMsg.id}"
+								href="editUserMsg.jsp?type=edit&username=${userMsg.name}&tel=${userMsg.phoneNumber}&id=${userMsg.id}"
 								class="btn">修改</a></td>
 						</tr>
 					</c:forEach>

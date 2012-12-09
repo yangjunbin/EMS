@@ -1,7 +1,8 @@
 package net.yp.web.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -62,21 +63,25 @@ public class LoginServlet extends HttpServlet {
 		LoginUser loginUser = loginService.queryLoginUser(params);
 		if(loginUser==null)
 		{
-	        PrintWriter out = response.getWriter();
-	        out.print("errorCount=-1");  
-	        out.flush();  
-	        out.close();  
+			request.setAttribute("msg", "用户或密码错误");
+			request.setAttribute("user", user);
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
 		else
 		{
-			Date loginTime = loginUser.getLoginTime();
-			loginService.editLoginUserLoginTime(loginUser.getUuid());
+			SimpleDateFormat sdf  =   new  SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+			Date loginTime = null;
+			try {
+				loginTime = sdf.parse(loginUser.getLoginTime());
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			loginService.editLoginUserLoginTime(loginUser.getId()+"");
 			if(loginUser.getStatus()==Constant.LOGIN_USER_FREEZE_STATUS&&new Date().getTime()-loginTime.getTime() < 1000*60*10)
 			{
-		        PrintWriter out = response.getWriter();
-		        out.print("errorCount=-2");  
-		        out.flush();  
-		        out.close();  
+				request.setAttribute("msg", "用户被冻结");
+				request.setAttribute("user", user);
+				request.getRequestDispatcher("/login.jsp").forward(request, response);
 			}
 			else
 			{
@@ -111,10 +116,9 @@ public class LoginServlet extends HttpServlet {
 						loginUser.setErrorCount(errorCount);
 						loginService.editLoginUserErrorCount(loginUser);
 					}
-			        PrintWriter out = response.getWriter();
-			        out.print("errorCount="+errorCount);  
-			        out.flush();  
-			        out.close();  
+					request.setAttribute("msg", "错误登陆5次将被冻结，当前<font color='red'>"+errorCount+"</font>次");
+					request.setAttribute("user", user);
+					request.getRequestDispatcher("/login.jsp").forward(request, response); 
 				}
 			}
 		}
@@ -146,4 +150,16 @@ public class LoginServlet extends HttpServlet {
 		// Put your code here
 	}
 
+	public static void main(String[] args) {
+		SimpleDateFormat sdf  =   new  SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+		try {
+			Date date = sdf.parse("2002-10-8 15:30:22");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+
+	}
 }

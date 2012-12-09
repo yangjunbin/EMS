@@ -15,9 +15,9 @@ public class LoginUser {
 	private String pwd;
 	private String name;
 	private String sex;
-	private Date regTime;
+	private String regTime;
 	private int status;
-	private Date loginTime;
+	private String loginTime;
 	private int errorCount;
 	
 	public String getUuid() {
@@ -56,23 +56,11 @@ public class LoginUser {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-	public Date getRegTime() {
-		return regTime;
-	}
-	public void setRegTime(Date regTime) {
-		this.regTime = regTime;
-	}
 	public int getStatus() {
 		return status;
 	}
 	public void setStatus(int status) {
 		this.status = status;
-	}
-	public Date getLoginTime() {
-		return loginTime;
-	}
-	public void setLoginTime(Date loginTime) {
-		this.loginTime = loginTime;
 	}
 	public int getErrorCount() {
 		return errorCount;
@@ -80,6 +68,17 @@ public class LoginUser {
 	public void setErrorCount(int errorCount) {
 		this.errorCount = errorCount;
 	}
-	
+	public String getRegTime() {
+		return regTime;
+	}
+	public void setRegTime(String regTime) {
+		this.regTime = regTime;
+	}
+	public String getLoginTime() {
+		return loginTime;
+	}
+	public void setLoginTime(String loginTime) {
+		this.loginTime = loginTime;
+	}
 	
 }

@@ -63,18 +63,24 @@ public class LoginUserServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String sex = request.getParameter("sex");
 		String uuid = request.getParameter("uuid");
-		String result = EmsUtil.getJsonResult(Constant.RESULT_SUCCESS, "");
+		String id = request.getParameter("id");
+		
+		String page = request.getParameter("page");
+		String pageSize = request.getParameter("pageSize");
+		
 		LoginUser loginUser = new LoginUser();
 		loginUser.setUuid(uuid);
 		loginUser.setName(name);
 		loginUser.setPwd(pwd);
 		loginUser.setSex(sex);
 		loginUser.setUser(user);
+		if(id!=null)
+		{
+			loginUser.setId(Integer.parseInt(id));
+		}
 		
 		if("query".equals(type))
 		{
-			String page = request.getParameter("page");
-			String pageSize = request.getParameter("pageSize");
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("page", page==null?0:Integer.parseInt(page)*Integer.parseInt(pageSize));
 			params.put("pageSize", pageSize==null?5:Integer.parseInt(pageSize));
@@ -86,51 +92,50 @@ public class LoginUserServlet extends HttpServlet {
 		}
 		else if("add".equals(type))
 		{
+			String msg = "";
 			Map<String,Object> params = new HashMap<String,Object>();
 			params.put("user", user);		
 			long count =  loginService.queryLoginUserCount(params);
 			if(count>0)
 			{
-		        PrintWriter out = response.getWriter();
-		        out.print(EmsUtil.getJsonResult(Constant.RESULT_FAILED, "用户已存在"));  
-		        out.flush();  
-		        out.close();  
+				msg = "用户已存在";
 			}
 			else
 			{
 				loginUser.setUuid(Constant.getUUID());
 				loginService.addLoginUser(loginUser);
-		        PrintWriter out = response.getWriter();
-		        out.print(result);  
-		        out.flush();  
-		        out.close();  
 			}
+			request.setAttribute("msg", msg);
+	        queryUser(request, response, page, pageSize);
+
 		}
 		else if("edit".equals(type))
 		{
 			loginService.editLoginUser(loginUser);
-	        PrintWriter out = response.getWriter();
-	        out.print(result);  
-	        out.flush();  
-	        out.close();  
+	        queryUser(request, response, page, pageSize);
 		}
 		else if("del".equals(type))
 		{
-			loginService.delLoginUser(uuid);
-	        PrintWriter out = response.getWriter();
-	        out.print(result);  
-	        out.flush();  
-	        out.close();  
+			loginService.delLoginUser(id);
+	        queryUser(request, response, page, pageSize);
 		}
 		else
 		{
-	        PrintWriter out = response.getWriter();
-	        out.print(EmsUtil.getJsonResult(Constant.RESULT_FAILED, "param error"));  
-	        out.flush();  
-	        out.close();  
+	        queryUser(request, response, page, pageSize);
 		}
 	}
 
+	private void queryUser(HttpServletRequest request,HttpServletResponse response,String page,String pageSize) throws ServletException, IOException
+	{
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("page", page==null?0:Integer.parseInt(page)*Integer.parseInt(pageSize));
+		params.put("pageSize", pageSize==null?5:Integer.parseInt(pageSize));
+		List<LoginUser> loginUsers = loginService.queryLoginUsers(params);
+		long size = loginService.queryLoginUserCount(params);
+		request.setAttribute("size", size);
+		request.setAttribute("loginUsers", loginUsers);
+		request.getRequestDispatcher("/loginUser.jsp").forward(request, response);
+	}
 	/**
 	 * The doPost method of the servlet. <br>
 	 *
