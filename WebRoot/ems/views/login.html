@@ -1,15 +1,8 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-  <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
-  <link rel="stylesheet" href="stylesheets/common.css" />
+  <link rel="stylesheet" href="../assets/stylesheets/bootstrap.min.css">
+  <link rel="stylesheet" href="../assets/stylesheets/common.css" />
   <style>
   .container .inner { width:940px; }
   .title { position:relative; }
@@ -34,10 +27,10 @@
   </div>
 
   <div class="container">
-    <form class="form-inline" action="LoginServlet" method="post">
+    <form class="form-inline">
       <legend>登入</legend>
-      <input type="text" class="input-middle" name="user" placeholder="用户名">
-      <input type="password" class="input-middle" name="pwd" placeholder="密码">
+      <input type="text" class="input-middle" placeholder="用户名">
+      <input type="password" class="input-middle" placeholder="密码">
       <button type="submit" class="btn btn-primary">登入</button>
       <button id="reset" type="reset" class="btn">取消</button>
     </form>
