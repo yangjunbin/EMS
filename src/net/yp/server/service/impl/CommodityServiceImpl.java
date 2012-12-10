@@ -18,18 +18,15 @@ public class CommodityServiceImpl implements CommodityService {
 	private static  Logger logger=Logger.getLogger(CommodityServiceImpl.class);
 
 	public String addCommodity(Commodity commodity) {
-		String status = "SUCCESS";
 		String result = "SUCCESS";
-		System.out.println("111111111111");
 		try {
 			commodityMapper.addCommodity(commodity);
 		} catch (Exception e) {
-			status = "FAILED";
 			result = e.getMessage();
 			logger.info(result);
 			e.printStackTrace();
 		}
-		return EmsUtil.getJsonResult(status, result);
+		return commodityMapper.queryCommoditySeqId()+"";
 	}
 
 	public String editCommodity(Commodity commodity) {

@@ -147,12 +147,13 @@ public class EmsTemplateServiceImpl implements EmsTemplateService {
 		EmsMsg emsMsg = new EmsMsg();
 		emsMsg.setId(emsMsgId);
 		emsMsg.setTid(tempId);
-		emsMsgMapper.editEmsMsg(emsMsg);
+		emsMsgMapper.editEmsMsgTempId(emsMsg);
 	}
 	public String addPublicityTemplate(PublicityTemplate publicityTemplate) {
 		try {
 			EmsTemplate emsTemplate = new EmsTemplate();
 			emsTemplate.setContext(publicityTemplate.getConText());
+			emsTemplate.setName(publicityTemplate.getPictureName());
 			emsTemplate.setType(Constant.COMMODITY_STATUS);
 			emsTemplateMapper.addEmsTemplate(emsTemplate);//保存模板
 			int pid = emsTemplateMapper.queryEmsTemplastSeqId();

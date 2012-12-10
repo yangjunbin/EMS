@@ -82,7 +82,7 @@ public class EmsTemplateServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
-		String emsMsgId = request.getParameter("emsMsgId");
+		String emsMsgId = "";
 		String result = "SUCCESS";
 		String status = Constant.RESULT_SUCCESS;
 		String type = request.getParameter("type");
@@ -99,6 +99,10 @@ public class EmsTemplateServlet extends HttpServlet {
 					String value = item.getString();
 					if ("type".equals(name)) {
 						type = value;
+					}
+					else if("emsMsgId".equals(name))
+					{
+						emsMsgId = value;
 					}
 				}
 			}
@@ -131,12 +135,11 @@ public class EmsTemplateServlet extends HttpServlet {
 						}
 						BufferedImage image = ImageIO.read(item
 								.getInputStream());
-						String filePath = EmsUtil
-								.getPropertiesForName("imagePath")
-								+ Constant.getUUID() + "jpg";
+						String flleName = Constant.getUUID() + ".jpg";
+						String filePath = request.getSession().getServletContext().getRealPath("/")+"img/"+flleName;
 						File outputFile = new File(filePath);
 						ImageIO.write(image, "jpg", outputFile);
-						qaTemplate.setPictureUrl(filePath);
+						qaTemplate.setPictureUrl("img/"+flleName);
 					}
 				}
 				result = emsTemplateService.addQaTemplate(qaTemplate);
@@ -159,7 +162,6 @@ public class EmsTemplateServlet extends HttpServlet {
 
 			} else if ("addPublicity".equals(type))// 新增宣传模板
 			{
-				fileItems = upload.parseRequest(request);
 				PublicityTemplate publicityTemplate = new PublicityTemplate();
 
 				for (int i = 0; i < fileItems.size(); i++) {
@@ -169,15 +171,20 @@ public class EmsTemplateServlet extends HttpServlet {
 						String value = item.getString();
 						if ("context".equals(name)) {
 							publicityTemplate.setConText(value);
-						} else if ("commodityIds".equals(name)) {
-							String[] ids = value.split(",");
-							List<Commodity> commoditys = new ArrayList<Commodity>();
-							for (String id : ids) {
-								Commodity commodity = new Commodity();
-								commodity.setId(Integer.parseInt(id));
-								commoditys.add(commodity);
+						} else if ("product_ids".equals(name)) {
+							if(!value.equals("")){
+								String[] ids = value.split(",");
+								List<Commodity> commoditys = new ArrayList<Commodity>();
+								for (String id : ids) {
+									Commodity commodity = new Commodity();
+									commodity.setId(Integer.parseInt(id));
+									commoditys.add(commodity);
+								}
+								publicityTemplate.setCommoditys(commoditys);
 							}
-							publicityTemplate.setCommoditys(commoditys);
+						}else if("name".equals(name))
+						{
+							publicityTemplate.setPictureName(value);
 						}
 					} else {
 						if (item.getSize() > 100 * 1024) {
@@ -187,15 +194,15 @@ public class EmsTemplateServlet extends HttpServlet {
 						}
 						BufferedImage image = ImageIO.read(item
 								.getInputStream());
-						String filePath = EmsUtil
-								.getPropertiesForName("imagePath")
-								+ Constant.getUUID() + "jpg";
+						String flleName = Constant.getUUID() + ".jpg";
+						String filePath = request.getSession().getServletContext().getRealPath("/")+"img/"+flleName;
 						File outputFile = new File(filePath);
 						ImageIO.write(image, "jpg", outputFile);
-						publicityTemplate.setPictureUrl(filePath);
+						publicityTemplate.setPictureUrl("img/"+flleName);
 					}
 
 				}
+				publicityTemplate.setEmsMsgId(Integer.parseInt(emsMsgId));
 				result = emsTemplateService
 						.addPublicityTemplate(publicityTemplate);
 			} else if ("addGeneral".equals(type))// 新增空模板
@@ -220,12 +227,11 @@ public class EmsTemplateServlet extends HttpServlet {
 						}
 						BufferedImage image = ImageIO.read(item
 								.getInputStream());
-						String filePath = EmsUtil
-								.getPropertiesForName("imagePath")
-								+ Constant.getUUID() + "jpg";
+						String flleName = Constant.getUUID() + ".jpg";
+						String filePath = request.getSession().getServletContext().getRealPath("/")+"img/"+flleName;
 						File outputFile = new File(filePath);
 						ImageIO.write(image, "jpg", outputFile);
-						generalTemplate.setPictureUrl(filePath);
+						generalTemplate.setPictureUrl("img/"+flleName);
 					}
 
 				}
@@ -255,16 +261,17 @@ public class EmsTemplateServlet extends HttpServlet {
 						}
 						BufferedImage image = ImageIO.read(item
 								.getInputStream());
-						String filePath = EmsUtil
-								.getPropertiesForName("imagePath")
-								+ Constant.getUUID() + ".jpg";
+						String flleName = Constant.getUUID() + ".jpg";
+						String filePath = request.getSession().getServletContext().getRealPath("/")+"img/"+flleName; 
 						File outputFile = new File(filePath);
 						ImageIO.write(image, "jpg", outputFile);
-						commodity.setFilePath(filePath);
+						commodity.setFilePath("img/"+flleName);
 					}
 				}
-				commodityService.addCommodity(commodity);
-				result = JSONObject.fromObject(commodity).toString();
+				String commodityId = commodityService.addCommodity(commodity);
+				request.setAttribute("id", commodityId);
+				request.setAttribute("image_url", commodity.getFilePath());
+				request.getRequestDispatcher("nms/addCommodityResult.jsp").forward(request, response);
 			}
 		} catch (FileUploadException e) {
 			status = "FAILED";
@@ -272,11 +279,11 @@ public class EmsTemplateServlet extends HttpServlet {
 			logger.info(result);
 			e.printStackTrace();
 		}
-
-		PrintWriter out = response.getWriter();
-		out.print(EmsUtil.getJsonResult(status, result));
-		out.flush();
-		out.close();
+//
+//		PrintWriter out = response.getWriter();
+//		out.print(EmsUtil.getJsonResult(status, result));
+//		out.flush();
+//		out.close();
 	}
 
 	/**

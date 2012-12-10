@@ -60,7 +60,7 @@
         <div class="control-group">
           <label class="control-label">名称</label>
           <div class="controls">
-            <input type="text" id="name" placeholder="输入模板名称">
+            <input type="text" id="name" name="name" placeholder="输入模板名称">
           </div>
         </div>
         <div class="control-group">
@@ -72,7 +72,7 @@
         <div class="control-group">
           <label class="control-label" for="content">专题介绍</label>
           <div class="controls">
-            <textarea id="content" name="desc"></textarea>
+            <textarea id="content" name="context" name="desc"></textarea>
           </div>
         </div>
       </fieldset>
@@ -86,7 +86,8 @@
         <p class="empty">暂时还没有商品, 现在去添加<a href="#product-tpl" role="button" class="btn-create-product"  data-toggle="modal">创建商品</a></p>
         <div class="control-group action-group">
           <div class="controls">
-            <input type="hidden" name="type" value="3">
+            <input type="hidden" name="emsMsgId" value="${emsMsgId}">
+            <input type="hidden" name="type" value="addPublicity">
             <input type="hidden" name="product_ids" id="product_ids" value="">
             <button type="submit" class="btn btn-primary">创建模板</button>
             <!--<a class="btn preview-btn" href="#" data-toggle="modal" data-target="#preview">手机上可能看到</a>-->

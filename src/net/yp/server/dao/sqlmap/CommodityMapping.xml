@@ -26,4 +26,10 @@
 		select id,name,createTime,costPrice,currentPrice,context,filePath from tb_commodity
 		where id=#{id,jdbcType=NUMERIC}
 	</select>
+	
+		<!-- 查询序列 -->
+	<select id="queryCommoditySeqId" resultType="Integer">
+		SELECT last_insert_id() as id FROM tb_commodity topic limit 1
+	</select>
+	
 </mapper>	

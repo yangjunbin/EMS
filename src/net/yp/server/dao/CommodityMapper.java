@@ -41,4 +41,10 @@ public interface CommodityMapper {
 	 * @return
 	 */
 	Commodity queryCommodityById(int id);
+	
+	/**
+	 * 查询序列
+	 * @return
+	 */
+	Integer queryCommoditySeqId();
 }

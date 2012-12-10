@@ -29,6 +29,13 @@ public interface EmsMsgMapper {
 	Integer editEmsMsgStatus(EmsMsg emsMsg);
 	
 	/**
+	 * 根据ID修改模板ID
+	 * @param emsMsg
+	 * @return
+	 */
+	Integer editEmsMsgTempId(EmsMsg emsMsg);
+	
+	/**
 	 * 删除网信信息
 	 * @param id
 	 * @return

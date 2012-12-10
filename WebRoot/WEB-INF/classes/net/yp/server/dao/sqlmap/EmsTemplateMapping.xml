@@ -12,8 +12,8 @@
 	
 	<!-- 新增模板属性 -->
 	<insert id="addEmsTemplateDetal" parameterType="EmsTemplateDetal">
-		insert into tb_ems_tempate_detal(pid,name,value,type,text)
-		values(#{pid,jdbcType=NUMERIC},#{name,jdbcType=VARCHAR}
+		insert into tb_ems_template_detal(pid,name,value,type,text)
+		values(#{pid,jdbcType=NUMERIC},#{name,jdbcType=VARCHAR},
 		#{value,jdbcType=VARCHAR},#{type,jdbcType=VARCHAR},#{text,jdbcType=VARCHAR})
 	</insert>
 	
@@ -24,12 +24,12 @@
 	
 	<!-- 查询模板属性 -->
 	<select id="queryEmsTemplateDetal" parameterType="Map" resultType="EmsTemplateDetal">
-		select id,pid,name,value,type,text from tb_ems_tempate_detal
+		select id,pid,name,value,type,text from tb_ems_template_detal
 		where pid=#{pid,jdbcType=NUMERIC}
 	</select>
 	
 	<!-- 查询序列 -->
-	<select id="queryEmsTemplastSeqId" resultType="Long">
+	<select id="queryEmsTemplastSeqId" resultType="Integer">
 		SELECT last_insert_id() as id FROM tb_ems_template topic limit 1
 	</select>
 	
