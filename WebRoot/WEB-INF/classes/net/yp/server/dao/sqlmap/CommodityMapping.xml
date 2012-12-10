@@ -5,13 +5,12 @@
 
 	<insert id="addCommodity" parameterType="Commodity">
 		insert into tb_commodity(name,createTime,costPrice,currentPrice,context,filePath)
-		values(#{name,jdbcType=VARCHAR},now(),#{costPrice,jdbcType=VARCHAR}
-		#{currentPrice,jdbcType=VARCHAR},#{context,jdbcType=VARCHAR},#{filePath,jdbcType=VARCHAR})
+		values(#{name,jdbcType=VARCHAR},now(),#{costPrice,jdbcType=NUMERIC},#{currentPrice,jdbcType=NUMERIC},#{context,jdbcType=VARCHAR},#{filePath,jdbcType=VARCHAR})
 	</insert>
 	
 	<update id="editCommodity" parameterType="Commodity">
-		update tb_commodity set name=#{name,jdbcType=VARCHAR},costPrice=#{costPrice,jdbcType=VARCHAR},
-		currentPrice=#{currentPrice,jdbcType=VARCHAR},context=#{context,jdbcType=VARCHAR}
+		update tb_commodity set name=#{name,jdbcType=VARCHAR},costPrice=#{costPrice,jdbcType=NUMERIC},
+		currentPrice=#{currentPrice,jdbcType=NUMERIC},context=#{context,jdbcType=VARCHAR}
 		where id=#{id,jdbcType=NUMERIC}
 	</update>
 	

@@ -66,7 +66,7 @@
         <div class="control-group">
           <label class="control-label" for="inputEmail">上传头图</label>
           <div class="controls">
-            <input type="file" id="inputName">
+            <input type="file" id="inputName" name="file2">
           </div>
         </div>
         <div class="control-group">
@@ -114,7 +114,7 @@
           <div class="control-group">
             <label class="control-label">图片</label>
             <div class="controls">
-              <input type="file" placeholder="输入模板名称">
+              <input type="file" name="file1" placeholder="输入模板名称">
             </div>
           </div>
           <div class="control-group">
@@ -126,19 +126,19 @@
           <div class="control-group">
             <label class="control-label">现价</label>
             <div class="controls">
-              <input type="text" id="price" name="currentprice">
+              <input type="text" id="price" name="currentPrice">
             </div>
           </div>
           <div class="control-group">
             <label class="control-label">原价</label>
             <div class="controls">
-              <input type="text" id="origin_price" name="costprice">
+              <input type="text" id="origin_price" name="costPrice">
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footer">
-        <input type="hidden" name="type" value="addCommodity">
+        <input type="hidden" name="type" id="addCommodity" value="addCommodity">
         <button type="reset" class="hide" id="reset_data">重置</button>
         <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
         <button type="submit" class="btn btn-primary">保存</button>
@@ -179,8 +179,8 @@
 
   <div><iframe name="create_product" class="hide"></iframe></div>
 
-  <script src="../../assets/javascripts/jquery.min.js"></script>
-  <script src="../../assets/javascripts/bootstrap.min.js"></script>
+  <script src="javascripts/jquery.min.js"></script>
+  <script src="javascripts/bootstrap.min.js"></script>
   <script>
     $('.preview-btn').click(function() {
       var preview = $('#preview');
@@ -190,6 +190,7 @@
 
     $('.btn-create-product').click(function() {
       $('#reset_data').click();
+      $('#addCommodity').val('addCommodity');
     });
 
     function create_product(id, image_url) {

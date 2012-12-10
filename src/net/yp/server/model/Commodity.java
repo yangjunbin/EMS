@@ -6,8 +6,8 @@ public class Commodity {
 	private int id;
 	private String name;
 	private Date createTime;
-	private String costPrice;
-	private String currentPrice;
+	private float costPrice;
+	private float currentPrice;
 	private String context;
 	private String filePath;
 	public int getId() {
@@ -34,24 +34,23 @@ public class Commodity {
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
 	}
-	public String getCostPrice() {
-		return costPrice;
-	}
-	public void setCostPrice(String costPrice) {
-		this.costPrice = costPrice;
-	}
-	public String getCurrentPrice() {
-		return currentPrice;
-	}
-	public void setCurrentPrice(String currentPrice) {
-		this.currentPrice = currentPrice;
-	}
 	public String getContext() {
 		return context;
 	}
 	public void setContext(String context) {
 		this.context = context;
 	}
-	
+	public float getCostPrice() {
+		return costPrice;
+	}
+	public void setCostPrice(float costPrice) {
+		this.costPrice = costPrice;
+	}
+	public float getCurrentPrice() {
+		return currentPrice;
+	}
+	public void setCurrentPrice(float currentPrice) {
+		this.currentPrice = currentPrice;
+	}
 	
 }

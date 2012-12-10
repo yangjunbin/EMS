@@ -22,7 +22,7 @@ public class EmsUtil {
         Properties prop = new Properties ();
         try
         {
-            prop.load (Thread.currentThread ().getContextClassLoader ().getResourceAsStream ("resource/properties"));
+            prop.load (Thread.currentThread ().getContextClassLoader ().getResourceAsStream ("resource/common.properties"));
         }
         catch (IOException e)
         {

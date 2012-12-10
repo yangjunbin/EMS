@@ -20,6 +20,7 @@ public class CommodityServiceImpl implements CommodityService {
 	public String addCommodity(Commodity commodity) {
 		String status = "SUCCESS";
 		String result = "SUCCESS";
+		System.out.println("111111111111");
 		try {
 			commodityMapper.addCommodity(commodity);
 		} catch (Exception e) {

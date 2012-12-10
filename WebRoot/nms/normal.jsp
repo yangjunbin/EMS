@@ -50,7 +50,7 @@
         <div class="control-group">
           <label class="control-label" for="inputEmail">上传头图</label>
           <div class="controls">
-            <input type="file" id="inputName">
+            <input type="file" id="inputName" name="inputName">
           </div>
         </div>
         <div class="control-group">
