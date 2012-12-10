@@ -33,6 +33,9 @@
   #preview .modal-body { max-height:432px; }
   #preview .photo { text-align:center; }
   #preview .photo img { margin:3px 0 8px; max-width:240px; min-height:100px; background:#efefef; width:240px; height:100px; }
+  .modal-body { padding-bottom:0; }
+  form { margin:0; }
+  h3 { font-weight:normal; }
   </style>
 </head>
 <body>
@@ -51,17 +54,17 @@
   </div>
 
   <div class="container">
-    <form action=“EmsTemplateServlet?type=addPublicity” enctype="multipart/form-data" method="post">
+    <form id="form-create-module" action="EmsTemplateServlet" method="post" enctype="multipart/form-data">
       <fieldset>
         <legend>创建宣传模板</legend>
         <div class="control-group">
           <label class="control-label">名称</label>
           <div class="controls">
-            <input type="text" id="text" placeholder="输入模板名称">
+            <input type="text" id="name" placeholder="输入模板名称">
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label">上传头图</label>
+          <label class="control-label" for="inputEmail">上传头图</label>
           <div class="controls">
             <input type="file" id="inputName">
           </div>
@@ -69,7 +72,7 @@
         <div class="control-group">
           <label class="control-label" for="content">专题介绍</label>
           <div class="controls">
-            <textarea id="content" name="context"></textarea>
+            <textarea id="content" name="desc"></textarea>
           </div>
         </div>
       </fieldset>
@@ -77,18 +80,16 @@
       <fieldset>
         <legend>创建展示商品</legend>
         <div class="product-list">
-          <ul class="clearfix">
-
-          </ul>
-          <p><a href="#" class="btn">继续添加</a></p>
+          <ul class="clearfix"></ul>
         </div>
-        <p class="empty hide">暂时还没有商品, 现在去添加<a href="#product-tpl" role="button" data-toggle="modal">创建商品</a></p>
-      </fieldset>
-
+        <p class="add-continue hide"><a href="#product-tpl" role="button" data-toggle="modal" class="btn btn-create-product">继续添加</a></p>
+        <p class="empty">暂时还没有商品, 现在去添加<a href="#product-tpl" role="button" class="btn-create-product"  data-toggle="modal">创建商品</a></p>
         <div class="control-group action-group">
           <div class="controls">
+            <input type="hidden" name="type" value="3">
+            <input type="hidden" name="product_ids" id="product_ids" value="">
             <button type="submit" class="btn btn-primary">创建模板</button>
-            <a class="btn preview-btn" href="#" data-toggle="modal" data-target="#preview">手机上可能看到</a>
+            <!--<a class="btn preview-btn" href="#" data-toggle="modal" data-target="#preview">手机上可能看到</a>-->
           </div>
         </div>
       </fieldset>
@@ -97,48 +98,52 @@
 
   <!--创建商品-->
   <div id="product-tpl" class="modal hide fade">
-    <div class="modal-header">
-      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      <h3>创建商品</h3>
-    </div>
-    <div class="modal-body">
-      <div class="product">
-        <div class="control-group">
-          <label class="control-label">名称</label>
-          <div class="controls">
-            <input type="text" placeholder="输入商品名称">
+    <form action="EmsTemplateServlet" id="form-create-product" target="create_product" method="post" enctype="multipart/form-data">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>创建商品</h3>
+      </div>
+      <div class="modal-body">
+        <div class="product">
+          <div class="control-group">
+            <label class="control-label">名称</label>
+            <div class="controls">
+              <input type="text" id="product-name" name="name" placeholder="输入商品名称">
+            </div>
           </div>
-        </div>
-        <div class="control-group">
-          <label class="control-label">图片</label>
-          <div class="controls">
-            <input type="file" placeholder="输入模板名称">
+          <div class="control-group">
+            <label class="control-label">图片</label>
+            <div class="controls">
+              <input type="file" placeholder="输入模板名称">
+            </div>
           </div>
-        </div>
-        <div class="control-group">
-          <label class="control-label">商品介绍</label>
-          <div class="controls">
-            <textarea class="desc-text"></textarea>
+          <div class="control-group">
+            <label class="control-label">商品介绍</label>
+            <div class="controls">
+              <textarea class="desc-text" id="product-desc" name="context"></textarea>
+            </div>
           </div>
-        </div>
-        <div class="control-group">
-          <label class="control-label">现价</label>
-          <div class="controls">
-            <input type="text">
+          <div class="control-group">
+            <label class="control-label">现价</label>
+            <div class="controls">
+              <input type="text" id="price" name="currentprice">
+            </div>
           </div>
-        </div>
-        <div class="control-group">
-          <label class="control-label">原价</label>
-          <div class="controls">
-            <input type="text">
+          <div class="control-group">
+            <label class="control-label">原价</label>
+            <div class="controls">
+              <input type="text" id="origin_price" name="costprice">
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
-      <button class="btn btn-primary">保存</button>
-    </div>
+      <div class="modal-footer">
+        <input type="hidden" name="type" value="addCommodity">
+        <button type="reset" class="hide" id="reset_data">重置</button>
+        <button class="btn" data-dismiss="modal" aria-hidden="true">取消</button>
+        <button type="submit" class="btn btn-primary">保存</button>
+      </div>
+    </form>
   </div>
 
   <!--预览-->
@@ -161,8 +166,8 @@
   </div>
 
   <xmp id="prodcut-tpl" class="hide">
-    <li>
-      <p class="photo"><img src="%img%" /></p>
+    <li data-id="%id%">
+      <p class="photo"><img src="%image_url%" /></p>
       <p class="name">%name%</p>
       <p class="desc">%desc%</p>
       <p class="price">
@@ -172,14 +177,48 @@
     </li>
   </xmp>
 
+  <div><iframe name="create_product" class="hide"></iframe></div>
+
   <script src="../../assets/javascripts/jquery.min.js"></script>
   <script src="../../assets/javascripts/bootstrap.min.js"></script>
   <script>
-  $('.preview-btn').click(function() {
-    var preview = $('#preview');
-    preview.find(".info").html($("#content").val() || "这是模板介绍");
-    preview.find("ul").html($(".product-list ul").html());
-  });
+    $('.preview-btn').click(function() {
+      var preview = $('#preview');
+      preview.find(".info").html($("#content").val() || "这是模板介绍");
+      preview.find("ul").html($(".product-list ul").html());
+    });
+
+    $('.btn-create-product').click(function() {
+      $('#reset_data').click();
+    });
+
+    function create_product(id, image_url) {
+      var obj = {
+        id: id,
+        image_url: image_url,
+        name: $('#product-name').val(),
+        desc: $('#product-desc').val(),
+        price: $('#price').val(),
+        origin_price: $('#origin_price').val()
+      }, tpl = $("#prodcut-tpl").html();
+      $(".product-list ul").append(tpl.replace(/%([^%]+)%/g, function(s,a) { return obj[a]; }));
+      if($('.product-list li').length == 1) {
+        $('.empty').hide();
+        $('.add-continue').show();
+      }
+    }
+
+    $('#form-create-module').submit(function() {
+      var ids = [];
+      $(".product-list li").each(function(i,o) {
+        ids.push($(o).data('id'));
+      });
+      $('#product_ids').val(ids.join(","));
+    });
+
+    $('#form-create-product').submit(function(){
+      $('#product-tpl .close').click();
+    });
   </script>
 </body>
 </html>
