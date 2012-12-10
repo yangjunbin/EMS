@@ -81,7 +81,7 @@
                 <p class="title">题库</p>
                 <ul>
                   <c:forEach var="questionAndAnswer" items="${questionAndAnswers}">
-                    <li data-id="${questionAndAnswer.question.uuid}" data-options='<c:forEach var="answer" varStatus="i" items="${questionAndAnswer.answers}">${i.index}. ${answer.context}</c:forEach>'><span class="q_text">${questionAndAnswer.question.name}</span></li>
+                    <li data-id="${questionAndAnswer.question.id}" data-options='<c:forEach var="answer" varStatus="i" items="${questionAndAnswer.answers}">${i.index}. ${answer.context}</c:forEach>'><span class="q_text">${questionAndAnswer.question.name}</span></li>
                   </c:forEach>
                 </ul>
               </div>

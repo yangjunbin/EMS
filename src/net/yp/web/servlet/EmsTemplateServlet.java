@@ -106,13 +106,13 @@ public class EmsTemplateServlet extends HttpServlet {
 	                    }
 	                    else if("questionIds".equals(name))
 	                    {
-	                    	String[] uuids = value.split(",");
+	                    	String[] ids = value.split(",");
 	                    	 List<QuestionAndAnswer> questions = new ArrayList<QuestionAndAnswer>();
-	                    	for(String uuid : uuids)
+	                    	for(String id : ids)
 	                    	{
 	                    		QuestionAndAnswer questionAndAnswer = new QuestionAndAnswer();
 	                    		Question question = new Question();
-	                    		question.setUuid(uuid);
+	                    		question.setId(Integer.parseInt(id));
 	                    		questionAndAnswer.setQuestion(question);
 	                    		questions.add(questionAndAnswer);
 	                    	}
@@ -173,12 +173,12 @@ public class EmsTemplateServlet extends HttpServlet {
 	                    }
 	                    else if("commodityIds".equals(name))
 	                    {
-	                    	String[] uuids = value.split(",");
+	                    	String[] ids = value.split(",");
 	                    	List<Commodity> commoditys = new ArrayList<Commodity>();
-	                    	for(String uuid : uuids)
+	                    	for(String id : ids)
 	                    	{
 	                    		Commodity commodity = new Commodity();
-	                    		commodity.setUuid(uuid);
+	                    		commodity.setId(Integer.parseInt(id));
 	                    		commoditys.add(commodity);
 	                    	}
 	                    	publicityTemplate.setCommoditys(commoditys);
@@ -298,7 +298,6 @@ public class EmsTemplateServlet extends HttpServlet {
 		        		    commodity.setFilePath(filePath);
 		                }
 		            }
-		            commodity.setUuid(Constant.getUUID());
 		            commodityService.addCommodity(commodity);
 		            result = JSONObject.fromObject(commodity).toString();
 

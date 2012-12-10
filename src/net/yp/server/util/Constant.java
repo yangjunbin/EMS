@@ -26,7 +26,7 @@ public class Constant {
 	/**
 	 * 未分组ID
 	 */
-	public final static String UNGROUPED_ID = "1c5e118e-e7c2-4421-83fd-b762d7359202";
+	public final static int UNGROUPED_ID = 0;
 
 	/**
 	 * 返回成功状态

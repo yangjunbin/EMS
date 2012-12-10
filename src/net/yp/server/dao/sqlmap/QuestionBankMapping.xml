@@ -5,61 +5,61 @@
 
 	<!-- 新增问题 -->
 	<insert id="addQuestion" parameterType="Question">
-		insert into tb_question(uuid,name,createTime,type)
-		values(#{uuid,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},now(),
+		insert into tb_question(name,createTime,type)
+		values(#{name,jdbcType=VARCHAR},now(),
 		#{type,jdbcType=VARCHAR})
 	</insert>
 	
 	<!-- 修改问题 -->
 	<update id="editQuestion" parameterType="Question">
 		update tb_question set name=#{name,jdbcType=VARCHAR},type=#{type,jdbcType=VARCHAR}
-		where id=#{uuid,jdbcType=VARCHAR}
+		where id=#{id,jdbcType=NUMERIC}
 	</update>
 	
 	<!-- 删除问题 -->
-	<delete id="delQuestion" parameterType="String">
-		delete from tb_question where id=#{id,jdbcType=VARCHAR}
+	<delete id="delQuestion" parameterType="Integer">
+		delete from tb_question where id=#{id,jdbcType=NUMERIC}
 	</delete>
 	
 	<!-- 新增答案 -->
 	<insert id="addAnswer" parameterType="Answer">
-		insert into tb_answer(uuid,quuid,context)
-		values(#{uuid,jdbcType=VARCHAR},#{quuid,jdbcType=VARCHAR},#{context,jdbcType=VARCHAR})
+		insert into tb_answer(qid,context)
+		values(#{qid,jdbcType=NUMERIC},#{context,jdbcType=VARCHAR})
 	</insert>
 	
 	<!-- 修改答案 -->
 	<update id="editAnswer" parameterType="Answer">
-		update tb_answer set context=#{context,jdbcType=VARCHAR} where uuid=#{uuid,jdbcType=VARCHAR}
+		update tb_answer set context=#{context,jdbcType=VARCHAR} where id=#{id,jdbcType=NUMERIC}
 	</update>
 	
 	<!-- 删除答案 -->
 	<delete id="delAnswer" parameterType="Map">
 		delete from tb_answer where 1=1
-		<if test="uuid!=null">
-			and uuid=#{uuid,jdbcType=VARCHAR}
+		<if test="id!=null">
+			and id=#{id,jdbcType=NUMERIC}
 		</if>
-		<if test="quuid!=null">
-			and quuid=#{quuid,jdbcType=VARCHAR}
+		<if test="qid!=null">
+			and qid=#{qid,jdbcType=NUMERIC}
 		</if>
 	</delete>
 	
 	<!-- 查询问题 -->
 	<select id="queryQuestion" resultType="Question" parameterType="Map"> 
-		select id,uuid,name,createTime,type from tb_question
+		select id,name,createTime,type from tb_question
 		<include refid="CommonMapper.mysqlPaging"/>
 	</select>
 	<!-- 根据问题ID查询问题信息 -->
-	<select id="queryQuestionById" resultType="Question" parameterType="String">
-		select id,uuid,name,createTime,type from tb_question
-		where uuid=#{uuid,jdbcType=VARCHAR}
+	<select id="queryQuestionById" resultType="Question" parameterType="Integer">
+		select id,name,createTime,type from tb_question
+		where id=#{id,jdbcType=NUMERIC}
 	</select>
 	<!-- 查询问题记录数 -->
 	<select id="queryquestionCount" resultType="Long">
 		select count(1) from tb_question
 	</select>
 	<!-- 查询答案 -->
-	<select id="queryAnswer" resultType="Answer" parameterType="String">
-		select id,uuid,quuid,context from tb_answer
-		where quuid=#{quuid,jdbcType=VARCHAR}
+	<select id="queryAnswer" resultType="Answer" parameterType="Integer">
+		select id,qid,context from tb_answer
+		where qid=#{qid,jdbcType=NUMERIC}
 	</select>
 </mapper>	

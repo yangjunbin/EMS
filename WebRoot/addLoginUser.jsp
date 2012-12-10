@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <div class="control-group">
             <label class="control-label" for="username">用户名</label>
             <div class="controls">
-              <input type="text" id="username" name="user" placeholder="输入用户名">
+              <input type="text" id="username" name="user" placeholder="输入用户名"> ${msg}
             </div>
           </div>
           <div class="control-group">

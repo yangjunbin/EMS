@@ -80,7 +80,6 @@ public class EmsMsgServlet extends HttpServlet {
 		else if("add".equals(type))
 		{
 			EmsMsg emsMsg = new EmsMsg();
-			emsMsg.setUuid(Constant.getUUID());
 			emsMsg.setUid(Integer.parseInt(uid));
 			emsMsg.setMsg(msg);
 			emsMsg.setName(name);
@@ -114,7 +113,7 @@ public class EmsMsgServlet extends HttpServlet {
 		}
 		else if("del".equals(type))
 		{
-			result = emsMsgService.delEmsMsg(id);
+			result = emsMsgService.delEmsMsg(Integer.parseInt(id));
 		}
 		else if("editStatus".equals(type))
 		{

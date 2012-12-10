@@ -68,8 +68,8 @@ public class UserGroupRelServlet extends HttpServlet {
 			for(int i=0;i<count;i++)
 			{
 				UserGroupRel userGroupRel = new UserGroupRel();
-				userGroupRel.setMsgId(userIds[i]);
-				userGroupRel.setGroupId(groupId);
+				userGroupRel.setMsgId(Integer.parseInt(userIds[i]));
+				userGroupRel.setGroupId(Integer.parseInt(groupId));
 			}
 			result = userService.addUserGroupRel(userGroupRels);
 		}
@@ -81,8 +81,8 @@ public class UserGroupRelServlet extends HttpServlet {
 			for(int i=0;i<count;i++)
 			{
 				UserGroupRel userGroupRel = new UserGroupRel();
-				userGroupRel.setMsgId(userIds[i]);
-				userGroupRel.setGroupId(groupId);
+				userGroupRel.setMsgId(Integer.parseInt(userIds[i]));
+				userGroupRel.setGroupId(Integer.parseInt(groupId));
 			}
 			result = userService.delUserGroupRel(userGroupRels);
 		}

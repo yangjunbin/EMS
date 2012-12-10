@@ -60,7 +60,6 @@ public class EmsSendServlet extends HttpServlet {
 			for (String number : numbers)
 			{
 				EmsSend emsSend = new EmsSend();
-				emsSend.setUuid(Constant.getUUID());
 				emsSend.setSendText(sendText);
 				emsSend.setPhoneNumber(number);
 				emsSends.add(emsSend);

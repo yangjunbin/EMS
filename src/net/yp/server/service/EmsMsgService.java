@@ -30,10 +30,10 @@ public interface EmsMsgService {
 	
 	/**
 	 * 删除网信信息
-	 * @param uuid
+	 * @param id
 	 * @return
 	 */
-	String delEmsMsg(String uuid);
+	String delEmsMsg(int id);
  
 	/**
 	 * 查询网信信息

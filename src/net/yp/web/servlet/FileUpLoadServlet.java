@@ -156,8 +156,6 @@ public class FileUpLoadServlet extends HttpServlet {
                     cell.setCellType (Cell.CELL_TYPE_STRING);
                 dim.setPhoneNumber ((cell == null) ? "" : cell.toString ().trim ());
                 
-                dim.setUuid(Constant.getUUID());
-                
                 dims.add (dim);
             }
         }

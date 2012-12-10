@@ -5,74 +5,84 @@
 
 	<!-- 获取所有的登陆用户信息 -->
 	<select id="queryLoginUsers" parameterType="Map" resultType="LoginUser">
-			select user,id,uuid,pwd,name,sex,date_format(str_to_date(regTime,'%Y-%m-%d %H:%i:%s'),'%Y-%m-%d %H:%i:%s') regTime,status,date_format(loginTime,'%Y-%m-%d %H:%i:%s') loginTime,errorCount from tb_login_user 
-			<include refid="CommonMapper.mysqlPaging"/>
+		select user,id,pwd,name,sex,date_format(str_to_date(regTime,'%Y-%m-%d
+		%H:%i:%s'),'%Y-%m-%d %H:%i:%s')
+		regTime,status,date_format(loginTime,'%Y-%m-%d %H:%i:%s')
+		loginTime,errorCount from tb_login_user
+		<include refid="CommonMapper.mysqlPaging" />
 	</select>
-	
+
 	<!-- 根据条件获得一个登陆用户信息 -->
 	<select id="queryLoginUser" parameterType="Map" resultType="LoginUser">
-		select user,id,uuid,pwd,name,sex,regTime,status,loginTime,errorCount from tb_login_user 
+		select user,id,pwd,name,sex,regTime,status,loginTime,errorCount
+		from tb_login_user
 		where 1=1
 		<if test="user!=null">
 			and user=#{user,jdbcType=VARCHAR}
 		</if>
 	</select>
-	
+
 	<!-- 获取登陆用户信息记录数 -->
 	<select id="queryLoginUserCount" parameterType="Map" resultType="Long">
 		select count(1) from tb_login_user where 1=1
 		<if test="user!=null and pwd!=null">
 			and pwd=#{pwd,jdbcType=VARCHAR}
-			and user=#{user,jdbcType=VARCHAR}
+			and
+			user=#{user,jdbcType=VARCHAR}
 		</if>
 		<if test="user!=null and pwd==null">
 			and user=#{user,jdbcType=VARCHAR}
 		</if>
 	</select>
-	
+
 	<!-- 新增登陆用户 -->
 	<insert id="addLoginUser" parameterType="LoginUser">
-		insert into tb_login_user(uuid,user,pwd,name,sex,regtime)
-		values( #{uuid,jdbcType=VARCHAR},
-			    #{user,jdbcType=VARCHAR},
-				#{pwd,jdbcType=VARCHAR},
-				#{name,jdbcType=VARCHAR},
-				#{sex,jdbcType=NUMERIC},
-				now())
+		insert into
+		tb_login_user(user,pwd,name,sex,regtime)
+		values(
+		#{user,jdbcType=VARCHAR},
+		#{pwd,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR},
+		#{sex,jdbcType=NUMERIC},
+		now())
 	</insert>
-	
+
 	<!-- 修改登陆用户信息 -->
 	<update id="editLoginUser" parameterType="LoginUser">
-		update tb_login_user 
+		update tb_login_user
 		set pwd=#{pwd,jdbcType=VARCHAR},
-		    name=#{name,jdbcType=VARCHAR},
-		    sex=#{sex,jdbcType=NUMERIC}
-		where id=#{id,jdbcType=VARCHAR}
+		name=#{name,jdbcType=VARCHAR},
+		sex=#{sex,jdbcType=NUMERIC}
+		where id=#{id,jdbcType=NUMERIC}
 	</update>
-	
+
 	<!-- 修改登陆用户状态 -->
 	<update id="editLoginUserStatus" parameterType="LoginUser">
-		update tb_login_user
+		update
+		tb_login_user
 		set status=#{status,jdbcType=NUMERIC}
-		where id=#{id,jdbcType=VARCHAR}
+		where
+		id=#{id,jdbcType=NUMERIC}
 	</update>
-	
+
 	<!-- 更新登陆用户登陆时间 -->
-    <update id="editLoginUserLoginTime" parameterType="String">
-    	update tb_login_user
+	<update id="editLoginUserLoginTime" parameterType="Integer">
+		update tb_login_user
 		set loginTime=now()
-		where id=#{id,jdbcType=VARCHAR}
-    </update>
-	
+		where id=#{id,jdbcType=NUMERIC}
+	</update>
+
 	<!-- 修改错误登陆次数 -->
 	<update id="editLoginUserErrorCount" parameterType="LoginUser">
-		update tb_login_user
+		update
+		tb_login_user
 		set errorCount=#{errorCount,jdbcType=NUMERIC}
-		where id=#{id,jdbcType=VARCHAR}
+		where
+		id=#{id,jdbcType=NUMERIC}
 	</update>
-	
+
 	<!-- 删除登陆用户 -->
-	<delete id="delLoginUser" parameterType="String">
-	    delete from tb_login_user where id = #{id,jdbcType=VARCHAR}
+	<delete id="delLoginUser" parameterType="Integer">
+		delete from tb_login_user where id = #{id,jdbcType=NUMERIC}
 	</delete>
 </mapper>	

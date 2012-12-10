@@ -25,8 +25,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   	<form action="EmsMsgServlet">
   		msg:<input type="text" id="msg" name="msg"/><br>
-  		uuuid:<input type="text" id="uuuid" name="uuuid"/>(应该默认是当前登陆人)<br>
-  		tuuid:<input type="text" id="tuuid" name="tuuid"/>(应该是选择模板列表)<br>
+  		uid:<input type="text" id="uid" name="uid"/>(应该默认是当前登陆人)<br>
+  		tid:<input type="text" id="tid" name="tid"/>(应该是选择模板列表)<br>
   		<input type="hidden" value="add" id="type" name="type"/>
   		<input type="submit" value="submit"/>
   	</form>

@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
 						//默认分组
 						UserGroupRel userGroupRel = new UserGroupRel();
 						userGroupRel.setGroupId(Constant.UNGROUPED_ID);
-						userGroupRel.setMsgId(userMsg.getUuid());
+						userGroupRel.setMsgId(userMsg.getId());
 						userMsgMapper.addUserGroupRel(userGroupRel);
 						success++;
 					}
@@ -106,15 +106,15 @@ public class UserServiceImpl implements UserService {
 		return msg;
 	}
 
-	public String delUserMsg(List<String> uuids) {
+	public String delUserMsg(List<Integer> ids) {
 		int success = 0;
 		int failed = 0;
 		try {
-			int count = uuids.size();
+			int count = ids.size();
 			for(int i=0;i<count;i++)
 			{
-				String uuid = uuids.get(i);
-				int result = userMsgMapper.delUserMsg(uuid);
+				int id = ids.get(i);
+				int result = userMsgMapper.delUserMsg(id);
 				if(result>0)
 				{
 					success++;
@@ -172,14 +172,14 @@ public class UserServiceImpl implements UserService {
 		return msg;
 	}
 
-	public String delUserGroup(List<String> ids) {
+	public String delUserGroup(List<Integer> ids) {
 		int success = 0;
 		int failed = 0;
 		try {
 			int count = ids.size();
 			for(int i=0;i<count;i++)
 			{
-				String id = ids.get(i);
+				int id = ids.get(i);
 				int result = userMsgMapper.delUserGroup(id);
 				if(result>0)
 				{

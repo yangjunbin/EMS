@@ -60,10 +60,10 @@ public interface UserService {
      
      /**
       * 删除联系人信息
-      * @param uuids
+      * @param ids
       * @return
       */
-     String delUserMsg(List<String> uuids);
+     String delUserMsg(List<Integer> ids);
      
      /**
       * 新增联系人分组
@@ -81,10 +81,10 @@ public interface UserService {
      
      /**
       * 删除联系人分组
-      * @param uuids
+      * @param ids
       * @return
       */
-     String delUserGroup(List<String> uuids);
+     String delUserGroup(List<Integer> ids);
      
      /**
       * 新增联系人与分组关联

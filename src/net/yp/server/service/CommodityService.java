@@ -23,10 +23,10 @@ public interface CommodityService {
 	
 	/**
 	 * 删除商品
-	 * @param uuid
+	 * @param id
 	 * @return
 	 */
-	String delCommodity(String uuid);
+	String delCommodity(int id);
 	
 	/**
 	 * 查询商品

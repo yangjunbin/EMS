@@ -3,7 +3,6 @@ package net.yp.server.model;
 import java.util.Date;
 
 public class EmsMsg {
-	private String uuid;
 	private int id;
 	private int tid;//模板
 	private String name;
@@ -22,12 +21,6 @@ public class EmsMsg {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
-	public String getUuid() {
-		return uuid;
-	}
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
 	}
 	public int getId() {
 		return id;

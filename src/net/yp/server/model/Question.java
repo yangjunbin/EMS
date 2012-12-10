@@ -4,18 +4,10 @@ import java.util.Date;
 
 public class Question {
 	
-	private String uuid;
 	private int id;
 	private String name;
 	private Date createTime;
 	private String type;
-	
-	public String getUuid() {
-		return uuid;
-	}
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-	}
 	public int getId() {
 		return id;
 	}

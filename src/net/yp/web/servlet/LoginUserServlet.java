@@ -69,7 +69,7 @@ public class LoginUserServlet extends HttpServlet {
 		String pageSize = request.getParameter("pageSize");
 		
 		LoginUser loginUser = new LoginUser();
-		loginUser.setUuid(uuid);
+		loginUser.setId(Integer.parseInt(id));
 		loginUser.setName(name);
 		loginUser.setPwd(pwd);
 		loginUser.setSex(sex);
@@ -98,15 +98,15 @@ public class LoginUserServlet extends HttpServlet {
 			long count =  loginService.queryLoginUserCount(params);
 			if(count>0)
 			{
-				msg = "用户已存在";
+				msg = "<font color='red'>用户已存在</font>";
+				request.setAttribute("msg", msg);
+				request.getRequestDispatcher("/addLoginUser.jsp").forward(request, response);
 			}
 			else
 			{
-				loginUser.setUuid(Constant.getUUID());
 				loginService.addLoginUser(loginUser);
+		        queryUser(request, response, page, pageSize);
 			}
-			request.setAttribute("msg", msg);
-	        queryUser(request, response, page, pageSize);
 
 		}
 		else if("edit".equals(type))
@@ -116,7 +116,7 @@ public class LoginUserServlet extends HttpServlet {
 		}
 		else if("del".equals(type))
 		{
-			loginService.delLoginUser(id);
+			loginService.delLoginUser(Integer.parseInt(id));
 	        queryUser(request, response, page, pageSize);
 		}
 		else

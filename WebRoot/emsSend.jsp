@@ -27,7 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     	<table style="text-align: left; width: 100%;" border="1">
 		<tr>
-			<td>uuid</td>
+			<td>id</td>
 			<td>phoneNumber</td>
 			<td>status</td>
 			<td>recordTime</td>
@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</tr>
 		<c:forEach var="emsSend" items="${emsSends}">
 			<tr>
-				<td>${emsSend.uuid}</td>
+				<td>${emsSend.id}</td>
 				<td>${emsSend.phoneNumber}</td>
 				<td>${emsSend.status}</td>
 				<td>${emsSend.recordTime}</td>

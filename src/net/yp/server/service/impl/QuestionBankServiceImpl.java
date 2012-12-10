@@ -45,13 +45,13 @@ public class QuestionBankServiceImpl implements QuestionBankService {
 		return result;
 	}
 
-	public String delQuestion(String[] uuids) {
+	public String delQuestion(String[] ids) {
 		String status = Constant.RESULT_SUCCESS;
 		String result = "SUCCESS";
 		try {
-			int count = uuids.length;
+			int count = ids.length;
 			for (int i = 0; i < count; i++) {
-				questionBankMapper.delQuestion(uuids[i]);
+				questionBankMapper.delQuestion(Integer.parseInt(ids[i]));
 			}
 		} catch (Exception e) {
 			status = Constant.RESULT_FAILED;
@@ -84,14 +84,14 @@ public class QuestionBankServiceImpl implements QuestionBankService {
 		return result;
 	}
 
-	public String delAnswer(String[] uuids) {
+	public String delAnswer(String[] ids) {
 		String status = Constant.RESULT_SUCCESS;
 		String result = "SUCCESS";
 		try {
-			int count = uuids.length;
+			int count = ids.length;
 			Map<String, Object> params = new HashMap<String, Object>();
 			for (int i = 0; i < count; i++) {
-				params.put("uuid", uuids[i]);
+				params.put("id", Integer.parseInt(ids[i]));
 				questionBankMapper.delAnswer(params);
 			}
 		} catch (Exception e) {
@@ -103,12 +103,12 @@ public class QuestionBankServiceImpl implements QuestionBankService {
 		return EmsUtil.getJsonResult(status, result);
 	}
 
-	public String delAnswer(String puuid) {
+	public String delAnswer(int pid) {
 		String status = Constant.RESULT_SUCCESS;
 		String result = "SUCCESS";
 		try {
 			Map<String, Object> params = new HashMap<String, Object>();
-			params.put("puuid", puuid);
+			params.put("pid", pid);
 			questionBankMapper.delAnswer(params);
 		} catch (Exception e) {
 			status = Constant.RESULT_FAILED;
@@ -149,7 +149,7 @@ public class QuestionBankServiceImpl implements QuestionBankService {
 				QuestionAndAnswer questionAndAnswer = new QuestionAndAnswer();
 				questionAndAnswer.setQuestion(question);
 				List<Answer> answers = questionBankMapper.queryAnswer(question
-						.getUuid());
+						.getId());
 				questionAndAnswer.setAnswers(answers);
 				questionAndAnswers.add(questionAndAnswer);
 			}

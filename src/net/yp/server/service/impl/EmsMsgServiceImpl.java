@@ -80,11 +80,11 @@ public class EmsMsgServiceImpl implements EmsMsgService {
 		return EmsUtil.getJsonResult(status, result);
 	}
 
-	public String delEmsMsg(String uuid) {
+	public String delEmsMsg(int id) {
 		String status = Constant.RESULT_SUCCESS;
 		String result = "SUCCESS";
 		try {
-			emsMsgMapper.delEmsMsg(uuid);
+			emsMsgMapper.delEmsMsg(id);
 		} catch (Exception e) {
 			status = Constant.RESULT_FAILED;
 			result = e.getMessage();
@@ -119,9 +119,9 @@ public class EmsMsgServiceImpl implements EmsMsgService {
 	public EmsMsg queryEmsMsgDetal(EmsMsg emsMsg) {
 		String tempId = emsMsg.getTid()+"";
 		Map<String,Object> params = new HashMap<String,Object>();
-		params.put("uuid", tempId);
+		params.put("id", tempId);
 		EmsTemplate emsTemplate = emsTemplateMapper.queryEmsTemplateById(params);
-		params.put("puuid", tempId);
+		params.put("pid", tempId);
 		List<EmsTemplateDetal> emsTemplateDetals = emsTemplateMapper.queryEmsTemplateDetal(params);
 		String tempType = emsTemplate.getType();
 		if(tempType.equals(Constant.QUESTION_STATUS))
@@ -138,11 +138,11 @@ public class EmsMsgServiceImpl implements EmsMsgService {
 				else if(Constant.QUESTION_STATUS.equals(emsTemplateDetal.getType()))
 				{
 					QuestionAndAnswer questionAndAnswer = new QuestionAndAnswer();
-					String questionId = emsTemplateDetal.getValue();
+					int questionId = Integer.parseInt(emsTemplateDetal.getValue());
 					Question question = questionBankMapper.queryQuestionById(questionId);
 					questionAndAnswer.setQuestion(question);
 					List<Answer> answers = questionBankMapper.queryAnswer(question
-							.getUuid());
+							.getId());
 					questionAndAnswer.setAnswers(answers);
 					questionAndAnswers.add(questionAndAnswer);
 				}
@@ -180,8 +180,8 @@ public class EmsMsgServiceImpl implements EmsMsgService {
 				}
 				else if(Constant.COMMODITY_STATUS.equals(emsTemplateDetal.getType()))
 				{
-					String commondityId = emsTemplateDetal.getValue();
-					Commodity commodity = commodityMapper.queryCommodityByUUId(commondityId);
+					int commondityId = Integer.parseInt(emsTemplateDetal.getValue());
+					Commodity commodity = commodityMapper.queryCommodityById(commondityId);
 					commoditys.add(commodity);
 				}
 			}

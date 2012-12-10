@@ -1,6 +1,5 @@
 package net.yp.server.model;
 
-import java.util.Date;
 
 /**
  * 登陆用户信息
@@ -9,7 +8,6 @@ import java.util.Date;
  */
 public class LoginUser {
 	
-	private String uuid;
 	private int id;
 	private String user;
 	private String pwd;
@@ -20,12 +18,6 @@ public class LoginUser {
 	private String loginTime;
 	private int errorCount;
 	
-	public String getUuid() {
-		return uuid;
-	}
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-	}
 	public int getId() {
 		return id;
 	}

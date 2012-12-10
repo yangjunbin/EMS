@@ -42,7 +42,7 @@
   <!--内容-->
   <div class="container nms">
     <div class="content">
-      <form class="form-horizontal" action="/EMS/EmsMsgServlet?type=add" method="get">
+      <form class="form-horizontal" action="/EMS/EmsMsgServlet" method="post">
         <fieldset id="step-one">
           <legend>1. 创建短信</legend>
           <div class="control-group">
@@ -92,6 +92,7 @@
           <div class="control-group">
             <div class="controls">
               <input type="hidden" name="tempType" id="tempType" value="" />
+              <input type="hidden" name="type" id="type" value="add" />
               <button type="submit" class="btn btn-primary">去创建模板内容</button>
             </div>
           </div>
@@ -102,7 +103,7 @@
 
   <script src="../javascripts/jquery.min.js"></script>
   <script>
-    ('.choose_template .btn').click(function() {
+    $('.choose_template .btn').click(function() {
       var me = $(this);
       $("#tempType").val(me.data("type"));
       return false;

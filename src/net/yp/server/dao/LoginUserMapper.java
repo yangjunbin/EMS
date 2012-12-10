@@ -54,10 +54,10 @@ public interface LoginUserMapper
     
     /**
      * 更新登陆用户登陆时间
-     * @param uuid
+     * @param id
      * @return
      */
-    Integer editLoginUserLoginTime(String uuid);
+    Integer editLoginUserLoginTime(int id);
     
     /**
      * 修改错误登陆次数
@@ -68,9 +68,9 @@ public interface LoginUserMapper
     
     /**
      * 删除登陆用户
-     * @param uuid
+     * @param id
      * @return
      */
-    Integer delLoginUser(String uuid);
+    Integer delLoginUser(int id);
     
 }

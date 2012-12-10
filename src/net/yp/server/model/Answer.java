@@ -3,8 +3,7 @@ package net.yp.server.model;
 public class Answer {
 	
 	private int id;
-	private String uuid;
-	private String qid;
+	private int qid;
 	private String context;
 	
 	public int getId() {
@@ -13,16 +12,10 @@ public class Answer {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getUuid() {
-		return uuid;
-	}
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-	}
-	public String getQid() {
+	public int getQid() {
 		return qid;
 	}
-	public void setQid(String qid) {
+	public void setQid(int qid) {
 		this.qid = qid;
 	}
 	public String getContext() {

@@ -37,15 +37,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</tr>
 		<c:forEach var="emsMsg" items="${emsMsgs}">
 			<tr>
-				<td>${emsMsg.uuid}</td>
+				<td>${emsMsg.id}</td>
 				<td>${emsMsg.msg}</td>
-				<td>${emsMsg.uname}(${emsMsg.uuuid})</td>
-				<td>${emsMsg.tname}(${emsMsg.tuuid})</td>
+				<td>${emsMsg.uname}(${emsMsg.uid})</td>
+				<td>${emsMsg.tname}(${emsMsg.tid})</td>
 				<td>${emsMsg.status}</td>
 				<td>${emsMsg.createTime}</td>
 				<td><a href="addEmsMsg.jsp">新增</a></td>
-				<td><a href="editEmsMsg.jsp?id=${emsMsg.uuid}&msg=${emsMsg.msg}&uuuid=${emsMsg.uuuid}&uname=${emsMsg.uname}&tname=${emsMsg.tname}&tuuid=${emsMsg.tuuid}">修改</a></td>
-				<td><a href="EmsMsgServlet?type=del&id=${emsMsg.uuid}">删除</a></td>
+				<td><a href="editEmsMsg.jsp?id=${emsMsg.id}&msg=${emsMsg.msg}&uid=${emsMsg.uid}&uname=${emsMsg.uname}&tname=${emsMsg.tname}&tid=${emsMsg.tid}">修改</a></td>
+				<td><a href="EmsMsgServlet?type=del&id=${emsMsg.id}">删除</a></td>
 			</tr>
 		</c:forEach>
 	</table>

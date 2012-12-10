@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 public class EmsTemplate {
-	private String uuid;
 	private int id;
 	private String name;
 	private String type;
@@ -13,12 +12,6 @@ public class EmsTemplate {
 	private String context;
 	private List<EmsTemplateDetal> emsTemplateDetals;
 
-	public String getUuid() {
-		return uuid;
-	}
-	public void setUuid(String uuid) {
-		this.uuid = uuid;
-	}
 	public int getId() {
 		return id;
 	}

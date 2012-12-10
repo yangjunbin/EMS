@@ -75,7 +75,7 @@ public class LoginServiceImpl implements LoginService {
 		Integer result = 0;
 		try {
 			result = loginMapper.editLoginUserStatus(loginUser);
-			loginMapper.editLoginUserLoginTime(loginUser.getUuid());
+			loginMapper.editLoginUserLoginTime(loginUser.getId());
 		} catch (Exception e) {
 			logger.debug(e.getMessage());
 			e.printStackTrace();
@@ -83,7 +83,7 @@ public class LoginServiceImpl implements LoginService {
 		return result;
 	}
 
-	public Integer editLoginUserLoginTime(String id) {
+	public Integer editLoginUserLoginTime(int id) {
 		Integer result = 0;
 		try {
 			result = loginMapper.editLoginUserLoginTime(id);
@@ -107,7 +107,7 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	
-	public Integer delLoginUser(String id) {
+	public Integer delLoginUser(int id) {
 		Integer result = 0;
 		try {
 			result = loginMapper.delLoginUser(id);

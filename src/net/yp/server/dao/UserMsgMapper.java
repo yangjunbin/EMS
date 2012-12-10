@@ -70,10 +70,10 @@ public interface UserMsgMapper
      
      /**
       * 删除联系人信息
-      * @param uuid
+      * @param id
       * @return
       */
-     Integer delUserMsg(String uuid);
+     Integer delUserMsg(int id);
      
      /**
       * 新增联系人分组
@@ -91,10 +91,10 @@ public interface UserMsgMapper
      
      /**
       * 删除联系人分组
-      * @param uuid
+      * @param id
       * @return
       */
-     Integer delUserGroup(String uuid);
+     Integer delUserGroup(int id);
      
      /**
       * 新增联系人与分组关联

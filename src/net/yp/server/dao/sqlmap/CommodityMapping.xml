@@ -4,27 +4,27 @@
 <mapper namespace="net.yp.server.dao.CommodityMapper">
 
 	<insert id="addCommodity" parameterType="Commodity">
-		insert into tb_commodity(uuid,name,createTime,costPrice,currentPrice,context)
-		values(#{uuid,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},now(),#{costPrice,jdbcType=VARCHAR}
-		#{currentPrice,jdbcType=VARCHAR},#{context,jdbcType=VARCHAR})
+		insert into tb_commodity(name,createTime,costPrice,currentPrice,context,filePath)
+		values(#{name,jdbcType=VARCHAR},now(),#{costPrice,jdbcType=VARCHAR}
+		#{currentPrice,jdbcType=VARCHAR},#{context,jdbcType=VARCHAR},#{filePath,jdbcType=VARCHAR})
 	</insert>
 	
 	<update id="editCommodity" parameterType="Commodity">
 		update tb_commodity set name=#{name,jdbcType=VARCHAR},costPrice=#{costPrice,jdbcType=VARCHAR},
 		currentPrice=#{currentPrice,jdbcType=VARCHAR},context=#{context,jdbcType=VARCHAR}
-		where uuid=#{uuid,jdbcType=VARCHAR}
+		where id=#{id,jdbcType=NUMERIC}
 	</update>
 	
-	<delete id="delCommondity" parameterType="String">
-		delete from tb_commodity where uuid=#{uuid,jdbcType=VARCHAR}
+	<delete id="delCommondity" parameterType="Integer">
+		delete from tb_commodity where id=#{id,jdbcType=NUMERIC}
 	</delete>
 	
 	<select id="queryCommodity" parameterType="Map" resultType="Commodity">
-		select id,uuid,name,createTime,costPrice,currentPrice,context from tb_commodity
+		select id,name,createTime,costPrice,currentPrice,context,filePath from tb_commodity
 	</select>
 	
-	<select id="queryCommodityByUUId" parameterType="String" resultType="Commodity">
-		select id,uuid,name,createTime,costPrice,currentPrice,context from tb_commodity
-		where uuid=#{uuid,jdbcType=VARCHAR}
+	<select id="queryCommodityById" parameterType="String" resultType="Commodity">
+		select id,name,createTime,costPrice,currentPrice,context,filePath from tb_commodity
+		where id=#{id,jdbcType=NUMERIC}
 	</select>
 </mapper>	

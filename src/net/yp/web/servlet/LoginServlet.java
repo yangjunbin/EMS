@@ -76,7 +76,7 @@ public class LoginServlet extends HttpServlet {
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
-			loginService.editLoginUserLoginTime(loginUser.getId()+"");
+			loginService.editLoginUserLoginTime(loginUser.getId());
 			if(loginUser.getStatus()==Constant.LOGIN_USER_FREEZE_STATUS&&new Date().getTime()-loginTime.getTime() < 1000*60*10)
 			{
 				request.setAttribute("msg", "用户被冻结");

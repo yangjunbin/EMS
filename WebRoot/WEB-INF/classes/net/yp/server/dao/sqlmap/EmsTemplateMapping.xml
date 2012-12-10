@@ -5,27 +5,27 @@
 
 	<!-- 新增模板 -->
 	<insert id="addEmsTemplate" parameterType="EmsTemplate">
-		insert into tb_ems_template(uuid,name,type,createTime,context)
-		values(#{uuid,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},
+		insert into tb_ems_template(name,type,createTime,context)
+		values(#{name,jdbcType=VARCHAR},
 		#{type,jdbcType=VARCHAR},now(),#{context,jdbcType=VARCHAR})
 	</insert>
 	
 	<!-- 新增模板属性 -->
 	<insert id="addEmsTemplateDetal" parameterType="EmsTemplateDetal">
-		insert into tb_ems_tempate_detal(uuid,puuid,name,value,type,text)
-		values(#{uuid,jdbcType=VARCHAR},#{puuid,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR}
+		insert into tb_ems_tempate_detal(pid,name,value,type,text)
+		values(#{pid,jdbcType=NUMERIC},#{name,jdbcType=VARCHAR}
 		#{value,jdbcType=VARCHAR},#{type,jdbcType=VARCHAR},#{text,jdbcType=VARCHAR})
 	</insert>
 	
 	<!-- 查询模板 -->
 	<select id="queryEmsTemplate" parameterType="Map" resultType="EmsTemplate">
-		select id,uuid,name,type,createTime,context from tb_ems_template
+		select id,name,type,createTime,context from tb_ems_template
 	</select>
 	
 	<!-- 查询模板属性 -->
 	<select id="queryEmsTemplateDetal" parameterType="Map" resultType="EmsTemplateDetal">
-		select id,uuid,puuid,name,value,type,text from tb_ems_tempate_detal
-		where puuid=#{puuid,jdbcType=VARCHAR}
+		select id,pid,name,value,type,text from tb_ems_tempate_detal
+		where pid=#{pid,jdbcType=NUMERIC}
 	</select>
 	
 	<!-- 查询序列 -->
@@ -34,18 +34,18 @@
 	</select>
 	
 	<!-- 根据ID查询模板 -->
-	<select id="queryEmsTemplateByUUId" parameterType="Map" resultType="EmsTemplate">
-		select id,uuid,name,type,createTime,context from tb_ems_template
-		where uuid=#{uuid,jdbcType=VARCHAR}
+	<select id="queryEmsTemplateById" parameterType="Map" resultType="EmsTemplate">
+		select id,name,type,createTime,context from tb_ems_template
+		where id=#{id,jdbcType=NUMERIC}
 	</select>
 	
 	<!-- 删除模板 -->
 	<delete id="delEmsTemplate" parameterType="EmsTemplate">
-		delete from tb_ems_template where uuid=#{uuid,jdbcType=VARCHAR}
+		delete from tb_ems_template where id=#{id,jdbcType=NUMERIC}
 	</delete>
 	
 	<!-- 删除模板属性 -->
 	<delete id="delEmsTemplateDetal" parameterType="EmsTemplateDetal">
-		delete from tb_ems_template_detal where puuid=#{puuid,jdbcType=VARCHAR}
+		delete from tb_ems_template_detal where pid=#{pid,jdbcType=NUMERIC}
 	</delete>
 </mapper>	

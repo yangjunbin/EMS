@@ -45,11 +45,11 @@ public class CommodityServiceImpl implements CommodityService {
 		return EmsUtil.getJsonResult(status, result);
 	}
 
-	public String delCommodity(String uuid) {
+	public String delCommodity(int id) {
 		String status = "SUCCESS";
 		String result = "SUCCESS";
 		try {
-			commodityMapper.delCommodity(uuid);
+			commodityMapper.delCommodity(id);
 		} catch (Exception e) {
 			status = "FAILED";
 			result = e.getMessage();

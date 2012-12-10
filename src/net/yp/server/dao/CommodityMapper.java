@@ -23,10 +23,10 @@ public interface CommodityMapper {
 	
 	/**
 	 * 删除商品
-	 * @param uuid
+	 * @param id
 	 * @return
 	 */
-	Integer delCommodity(String uuid);
+	Integer delCommodity(int id);
 	
 	/**
 	 * 查询商品
@@ -37,8 +37,8 @@ public interface CommodityMapper {
 	
 	/**
 	 * 根据商品ID查询商品
-	 * @param uuid
+	 * @param id
 	 * @return
 	 */
-	Commodity queryCommodityByUUId(String uuid);
+	Commodity queryCommodityById(int id);
 }

@@ -84,7 +84,6 @@ public class UserMsgServlet extends HttpServlet {
 			String name = request.getParameter("name");
 			userMsg.setName(name);
 			userMsg.setPhoneNumber(phoneNumber);
-			userMsg.setUuid(Constant.getUUID());
 			userMsgs.add(userMsg);
 			result = userService.addUserMsgs(userMsgs);
 		}
@@ -102,11 +101,11 @@ public class UserMsgServlet extends HttpServlet {
 		}
 		else if("del".equals(type))
 		{
-			List<String> userMsgs = new ArrayList<String>();
+			List<Integer> userMsgs = new ArrayList<Integer>();
 			String id = request.getParameter("id");
 			if(id!=null)
 			{
-				userMsgs.add(id);
+				userMsgs.add(Integer.parseInt(id));
 				result = userService.delUserMsg(userMsgs);
 			}
 		}

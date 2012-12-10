@@ -81,22 +81,21 @@ public class UserGroupServlet extends HttpServlet {
 					response);
 		} else if ("add".equals(type)) {
 			UserGroup userGroup = new UserGroup();
-			userGroup.setUuid(Constant.getUUID());
 			userGroup.setName(name);
 			List<UserGroup> userGroups = new ArrayList<UserGroup>();
 			userGroups.add(userGroup);
 			result = userService.addUserGroup(userGroups);
 		} else if ("edit".equals(type)) {
 			UserGroup userGroup = new UserGroup();
-			userGroup.setId(userId);
+			userGroup.setId(Integer.parseInt(userId));
 			userGroup.setName(name);
 			result = userService.editUserGroup(userGroup);
 		} else if ("del".equals(type)) {
 			UserGroup userGroup = new UserGroup();
-			userGroup.setId(userId);
+			userGroup.setId(Integer.parseInt(userId));
 			userGroup.setName(name);
-			List<String> ids = new ArrayList<String>();
-			ids.add(userId);
+			List<Integer> ids = new ArrayList<Integer>();
+			ids.add(Integer.parseInt(userId));
 			result = userService.delUserGroup(ids);
 		}
 		PrintWriter out = response.getWriter();
