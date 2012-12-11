@@ -40,7 +40,7 @@
           <div class="control-group">
             <label class="control-label" for="inputEmail">姓名</label>
             <div class="controls">
-              <input type="text" id="inputName" value="#{param.username}" placeholder="输入联系人名称">
+              <input type="text" id="inputName" value="${param.username}" placeholder="输入联系人名称">
             </div>
           </div>
           <div class="control-group">

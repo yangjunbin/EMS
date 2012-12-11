@@ -69,7 +69,6 @@ public class LoginUserServlet extends HttpServlet {
 		String pageSize = request.getParameter("pageSize");
 		
 		LoginUser loginUser = new LoginUser();
-		loginUser.setId(Integer.parseInt(id));
 		loginUser.setName(name);
 		loginUser.setPwd(pwd);
 		loginUser.setSex(sex);
