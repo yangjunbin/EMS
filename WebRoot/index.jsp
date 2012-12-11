@@ -36,7 +36,7 @@ if(!"success".equals(request.getSession().getAttribute("status")))
   <div class="container nms">
     <div class="title">
       <h2>网信</h2>
-      <a class="action btn btn-primary" href="#">创建新网信</a>
+      <a class="action btn btn-primary" href="/nms/new.jsp">创建新网信</a>
     </div>
     <div class="content">
       <table class="table table-bordered table-striped">

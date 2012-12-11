@@ -22,24 +22,17 @@
   <!--内容-->
   <div class="container nms">
     <div class="content">
-      <form class="form-horizontal" action="UserMsgServlet" method="post">
+      <form class="form-horizontal" action="/UserGroupServlet" method="post">
         <fieldset>
-          <legend>新增联系人</legend>
+          <legend>新增联系人分组</legend>
           <div class="control-group">
-            <label class="control-label" for="inputEmail">姓名</label>
+            <label class="control-label" for="inputEmail">组名</label>
             <div class="controls">
-              <input type="text" id="inputName" name="name" value="" placeholder="输入联系人名称">
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="inputTel">手机号码</label>
-            <div class="controls">
-              <input type="text" id="inputTel" name="phoneNum" placeholder="输入联系人电话号码" value="">
+              <input type="text" id="inputName" name="name" value="" placeholder="输入联系人分组名称">
             </div>
           </div>
           <div class="control-group">
             <div class="controls">
-              <intpu type="hidden" value="#{param.id}" id="group_id" />
               <input type="hidden" value="add" id="type" name="type"/>
               <button type="submit" class="btn">更新</button>
             </div>
