@@ -22,10 +22,11 @@
   #step-two .control-group { margin:20px 0; text-align:center; }
   .form-horizontal #step-two .controls { margin:0; }
   #step-two ul { margin:0 auto; width:665px; }
+  .preview-choosed { border-color:#f23; }
   </style>
 </head>
 <body>
-  <%@include file="main_nav.jsp"%>
+  <%@include file="../main_nav.jsp"%>
 
   <!--内容-->
   <div class="container nms">
@@ -94,6 +95,8 @@
     $('.choose_template .btn').click(function() {
       var me = $(this);
       $("#tempType").val(me.data("type"));
+      $('.preview-choosed').removeClass("preview-choosed");
+      me.closest("li").find(".preview").addClass("preview-choosed");
       return false;
     });
   </script>

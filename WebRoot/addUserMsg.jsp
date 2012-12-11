@@ -24,23 +24,22 @@
     <div class="content">
       <form class="form-horizontal" action="UserMsgServlet" method="post">
         <fieldset>
-          <legend>更新联系人</legend>
+          <legend>新增联系人</legend>
           <div class="control-group">
             <label class="control-label" for="inputEmail">姓名</label>
             <div class="controls">
-              <input type="text" id="inputName" name="name" value="${param.username}" placeholder="输入联系人名称">
+              <input type="text" id="inputName" name="name" value="" placeholder="输入联系人名称">
             </div>
           </div>
           <div class="control-group">
             <label class="control-label" for="inputTel">手机号码</label>
             <div class="controls">
-              <input type="text" id="inputTel" name="phoneNum" placeholder="输入联系人电话号码" value="${param.tel}">
+              <input type="text" id="inputTel" name="phoneNum" placeholder="输入联系人电话号码" value="">
             </div>
           </div>
           <div class="control-group">
             <div class="controls">
-              <input type="hidden" value="edit" id="type" name="type"/>
-              <input type="hidden" value="${param.id}" id="id" name="id"/>
+              <input type="hidden" value="add" id="type" name="type"/>
               <button type="submit" class="btn">更新</button>
             </div>
           </div>

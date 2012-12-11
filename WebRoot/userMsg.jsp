@@ -48,8 +48,8 @@
 		<div class="title">
 			<h2>联系人</h2>
 			<div class="action">
-				<a class="btn btn-primary" href="#">创建新联系人</a> <a
-					class="btn btn-inverse" href="#">批量导入</a>
+				<a class="btn btn-primary" href="/addUserMsg.jsp">创建新联系人</a> <a
+					class="btn btn-inverse" href="/fileUpload.jsp">批量导入</a>
 			</div>
 		</div>
 		<div class="content">

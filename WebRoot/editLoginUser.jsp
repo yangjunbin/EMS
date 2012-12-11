@@ -25,7 +25,7 @@
 	<!--内容-->
 	<div class="container nms">
 		<div class="content">
-			<form class="form-horizontal" action=LoginUserServlet method="post">
+			<form class="form-horizontal" action="/LoginUserServlet" method="post">
 				<fieldset>
 					<legend>更新管理员</legend>
 					<div class="control-group">
