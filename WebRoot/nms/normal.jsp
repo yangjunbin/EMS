@@ -23,19 +23,7 @@
   </style>
 </head>
 <body>
-  <!--导航-->
-  <div class="navbar">
-    <div class="navbar-inner container">
-      <a class="brand" href="#">网信平台</a>
-      <ul class="nav">
-        <li><a href="#">首页</a></li>
-        <li class="active"><a href="#">网信管理</a></li>
-        <li><a href="#">模板</a></li>
-        <li><a href="#">联系人</a></li>
-        <li><a href="#">管理员</a></li>
-      </ul>
-    </div>
-  </div>
+  <%@include file="../main_nav.jsp"%>
 
   <div class="container">
     <form action="" method="post">

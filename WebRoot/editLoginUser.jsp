@@ -20,24 +20,7 @@
 </style>
 </head>
 <body>
-	<!--导航-->
-	<div class="navbar">
-		<div class="navbar-inner container">
-			<a class="brand" href="#">网信平台</a>
-			<ul class="nav">
-				<li><a href="#">首页</a>
-				</li>
-				<li><a href="#">网信管理</a>
-				</li>
-				<li><a href="#">模板</a>
-				</li>
-				<li class="active"><a href="#">联系人</a>
-				</li>
-				<li><a href="#">管理员</a>
-				</li>
-			</ul>
-		</div>
-	</div>
+	<%@include file="main_nav.jsp"%>
 
 	<!--内容-->
 	<div class="container nms">
@@ -69,18 +52,18 @@
 						<div class="controls">
 							<c:if test="${param.sex=='1'}">
 								<label class="radio"> <input type="radio" name="sex"
-									id="optionsRadios1" value="1" checked> 男 
+									id="optionsRadios1" value="1" checked> 男
 								</label>
 								<label class="radio"> <input type="radio" name="sex"
-									id="optionsRadios2" value="2"> 女 
+									id="optionsRadios2" value="2"> 女
 								</label>
 							</c:if>
 							<c:if test="${param.sex=='2'}">
 								<label class="radio"> <input type="radio" name="sex"
-									id="optionsRadios1" value="1"> 男 
+									id="optionsRadios1" value="1"> 男
 								</label>
 								<label class="radio"> <input type="radio" name="sex"
-									id="optionsRadios2" value="2" checked> 女 
+									id="optionsRadios2" value="2" checked> 女
 								</label>
 							</c:if>
 						</div>

@@ -22,21 +22,14 @@
   <!--导航-->
   <div class="navbar">
     <div class="navbar-inner container">
-      <a class="brand" href="#">网信平台</a>
-      <ul class="nav">
-        <li class="active"><a href="#">首页</a></li>
-        <li><a href="#">网信管理</a></li>
-        <li><a href="#">模板</a></li>
-        <li><a href="#">联系人</a></li>
-        <li><a href="#">管理员</a></li>
-      </ul>
+      <a class="brand" href="/login.jsp">网信平台</a>
     </div>
   </div>
 
   <div class="container">
     <form class="form-inline" action="LoginServlet" method="post">
       <legend>登入</legend>
-      <input type="text" class="input-middle" name="user" value="${user }" placeholder="用户名">
+      <input type="text" class="input-middle" name="user" value="${user}" placeholder="用户名">
       <input type="password" class="input-middle" name="pwd" placeholder="密码">
       <button type="submit" class="btn btn-primary">登入</button>
       <button id="reset" type="reset" class="btn">取消</button>
